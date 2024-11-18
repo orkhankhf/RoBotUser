@@ -1,0 +1,77 @@
+--------------------------------------------UrlsToProcess--------------------------------------------
+SELECT * FROM [dbo].[UrlsToProcess] order by Id desc
+
+--Get duplicates
+SELECT 
+    url, 
+    COUNT(*) AS DuplicateCount
+FROM 
+    UrlsToProcess
+GROUP BY 
+    url
+HAVING 
+    COUNT(*) > 1;
+
+--Count processed urls
+select count(*) FROM [dbo].[UrlsToProcess] where IsProcessed = 1
+
+--Delete duplicates but keep orginal URLs
+WITH CTE AS (
+    SELECT 
+        id,
+        url,
+        ROW_NUMBER() OVER (PARTITION BY url ORDER BY id) AS RowNum
+    FROM 
+        UrlsToProcess
+)
+DELETE FROM UrlsToProcess
+WHERE id IN (
+    SELECT id
+    FROM CTE
+    WHERE RowNum > 1
+);
+
+
+
+--------------------------------------------PhoneNumbers--------------------------------------------
+select * from PhoneNumbers order by Id desc;
+select count(*) from PhoneNumbers
+
+--Get duplicates
+SELECT 
+    FormattedNumber, 
+    COUNT(*) AS FormattedNumber
+FROM 
+    PhoneNumbers
+GROUP BY 
+    FormattedNumber
+HAVING 
+    COUNT(*) > 1;
+
+
+--Delete duplicates but keep orginal phone numbers
+WITH CTE AS (
+    SELECT 
+        id,
+        FormattedNumber,
+        ROW_NUMBER() OVER (PARTITION BY FormattedNumber ORDER BY id) AS RowNum
+    FROM 
+        PhoneNumbers
+)
+DELETE FROM PhoneNumbers
+WHERE id IN (
+    SELECT id
+    FROM CTE
+    WHERE RowNum > 1
+);
+
+--------------------------------------------PhoneNumbers--------------------------------------------
+select * from [Permissions];
+
+
+select * from DataFetchIntervals;
+
+
+select * from UserTokens;
+
+select * from TurboAzAdInfos order by Id desc
