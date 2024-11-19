@@ -57,9 +57,6 @@ namespace RoBotApp
         {
             base.OnStartup(e);
 
-            // Resolve the provider and load settings
-            var provider = ServiceProvider.GetRequiredService<IAppSettingsProvider>();
-            await AppSettings.LoadSettingsFromProviderAsync(provider);
         }
     }
 }

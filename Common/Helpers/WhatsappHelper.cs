@@ -1,5 +1,4 @@
 ﻿using Common.Resources;
-using Entities.Models;
 using InputSimulatorStandard;
 using NLog;
 using System.Runtime.InteropServices;

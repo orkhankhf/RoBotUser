@@ -1,12 +1,11 @@
-﻿using Entities.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
 {
     public class AppDbContext : DbContext
     {
         //entity
-        public DbSet<AppSetting> AppSettings { get; set; }
+        //public DbSet<AppSetting> AppSettings { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

@@ -162,4 +162,10 @@
   <data name="DataOperations_LoadNewNumbersBtn" xml:space="preserve">
     <value>Yeni nömrələri yüklə</value>
   </data>
+  <data name="DataOperations_RemainingTimeLimitIssue" xml:space="preserve">
+    <value>Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}</value>
+  </data>
+  <data name="DataOperations_NewNumbersSaved" xml:space="preserve">
+    <value>Yeni nömrələr yaddaşa yazıldı!</value>
+  </data>
 </root>

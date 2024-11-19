@@ -1,6 +1,4 @@
-﻿using Entities.Models;
-
-namespace Data.Interfaces
+﻿namespace Data.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

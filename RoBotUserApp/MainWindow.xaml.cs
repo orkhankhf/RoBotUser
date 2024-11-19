@@ -3,9 +3,9 @@ using Common.Helpers;
 using Common.Resources;
 using Entities.Enums;
 using Entities.RequestModels;
+using Microsoft.Extensions.DependencyInjection;
+using RoBotApp;
 using RoBotUserApp.Pages;
-using System.Net.Http;
-using System.Text.Json;
 using System.Windows;
 
 namespace RoBotUserApp
@@ -115,7 +115,7 @@ namespace RoBotUserApp
                 return;
             }
 
-            string apiUrl = $"/usertoken/{token}";
+            string apiUrl = $"/UserToken/GetRoleByToken/{token}";
 
             var res = await RequestHelper.GetAsync<GetRoleByTokenResponse>(apiUrl);
             

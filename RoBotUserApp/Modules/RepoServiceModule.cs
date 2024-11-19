@@ -43,9 +43,6 @@ namespace RoBotApp.Modules
 
             // Register UnitOfWork
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-            //Register AppSettingsProvider
-            builder.RegisterType<AppSettingsProvider>().As<IAppSettingsProvider>().InstancePerLifetimeScope();
         }
     }
 }

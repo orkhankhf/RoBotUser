@@ -88,6 +88,24 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni nömrələr yaddaşa yazıldı!.
+        /// </summary>
+        public static string DataOperations_NewNumbersSaved {
+            get {
+                return ResourceManager.GetString("DataOperations_NewNumbersSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}.
+        /// </summary>
+        public static string DataOperations_RemainingTimeLimitIssue {
+            get {
+                return ResourceManager.GetString("DataOperations_RemainingTimeLimitIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin şifrəsi yalnışdır!.
         /// </summary>
         public static string General_AdminPasswordIsWrong {

@@ -2,7 +2,6 @@
 using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Entities.Models;
 using NLogLogger = NLog.ILogger;
 using System.Text;
 using Common.Resources;

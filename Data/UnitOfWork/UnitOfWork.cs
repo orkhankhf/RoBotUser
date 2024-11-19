@@ -15,7 +15,7 @@ namespace Data.UnitOfWork
         }
 
         //entity
-        public IGenericRepository<AppSetting> AppSettingRepository => new GenericRepository<AppSetting>(_context);
+        //public IGenericRepository<AppSetting> AppSettingRepository => new GenericRepository<AppSetting>(_context);
 
         public IGenericRepository<T> GetRepository<T>() where T : class
         {

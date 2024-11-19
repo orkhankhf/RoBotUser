@@ -18,22 +18,6 @@ namespace Common
         }
 
         /// <summary>
-        /// Load settings from the database using the provided IAppSettingsProvider.
-        /// </summary>
-        public static async Task LoadSettingsFromProviderAsync(IAppSettingsProvider provider)
-        {
-            if (provider == null)
-                throw new ArgumentNullException(nameof(provider), "AppSettingsProvider cannot be null.");
-
-            var settings = await provider.GetAllSettingsAsync();
-
-            foreach (var setting in settings)
-            {
-                _databaseSettingsCache.AddOrUpdate(setting.Key, setting.Value, (_, _) => setting.Value);
-            }
-        }
-
-        /// <summary>
         /// Get a setting value from the cache or appsettings.json.
         /// </summary>
         public static string GetSetting(string key)
