@@ -177,4 +177,10 @@
   <data name="ExitAppBtn" xml:space="preserve">
     <value>Çıxış</value>
   </data>
+  <data name="SettingsOperations_VoiceMessagePhoneNumberTextBlock" xml:space="preserve">
+    <value>Səs mesajı yönləndiriləcək nömrə</value>
+  </data>
+  <data name="SettingsOperations_SaveBtn" xml:space="preserve">
+    <value>Yadda saxla</value>
+  </data>
 </root>

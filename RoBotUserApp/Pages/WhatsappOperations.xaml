@@ -6,17 +6,38 @@
              xmlns:local="clr-namespace:RoBotUserApp.Pages"
              Width="1400" Height="1000"
              Background="#FFFAFAFA">
-    <Grid>
-        <!-- Button to send whatsapp messages -->
-        <Button x:Name="SendMessagesBtn" Content="Müştərilərə mesaj göndər" Width="210" VerticalAlignment="Top" Margin="10,10,0,0" Click="SendMessagesBtn_Click"/>
+    <Grid Margin="10">
+        <!-- Define 2 columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
 
-        <Grid VerticalAlignment="Top" Width="180" Margin="231,18,991,0">
+        <!-- Define 5 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <!-- Button to send whatsapp messages -->
+        <Button x:Name="SendMessagesBtn"
+                Content="Müştərilərə mesaj göndər"
+                Width="210"
+                VerticalAlignment="Center"
+                Margin="0"
+                Click="SendMessagesBtn_Click"
+                Grid.Column="0" 
+                Grid.Row="0"/>
+
+        <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180">
             <!-- Send voice message input field -->
             <TextBlock x:Name="SendVoiceMessageText" Text="Səs mesajı göndərilsin" Margin="0,-2,0,0" VerticalAlignment="Top"/>
 
             <!-- Checkbox to confirm sending voice message after text message -->
             <CheckBox x:Name="SendVoiceMessageCheckBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="161,3,0,0" Checked="SendVoiceMessageCheckBox_Toggle" Unchecked="SendVoiceMessageCheckBox_Toggle"/>
         </Grid>
-
     </Grid>
 </UserControl>

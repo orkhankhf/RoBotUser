@@ -4,7 +4,7 @@
              x:Name="DataOperationsControl"
              Width="1400" Height="1000"
              Background="#FFFAFAFA">
-    <Grid>
+    <Grid Margin="10">
         <!-- Define 2 columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -22,16 +22,6 @@
 
         <!-- Example elements for each cell -->
         <!-- Row 1 -->
-        <Button x:Name="LoadNewNumbersBtn" Content="Yeni nömrələri yüklə" Grid.Column="0" Grid.Row="0" Click="LoadNewNumbersBtn_Click" />
-
-        <!-- Row 2 -->
-        <Button Content="Test"
-                Grid.Column="0" 
-                Grid.Row="1" />
-
-        <!-- Row 3 -->
-        <Button Content="Test"
-                Grid.Column="0" 
-                Grid.Row="2" />
+        <Button x:Name="LoadNewNumbersBtn" Content="Yeni nömrələri yüklə" Margin="0" Grid.Column="0" Grid.Row="0" Click="LoadNewNumbersBtn_Click" />
     </Grid>
 </UserControl>

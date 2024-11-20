@@ -6,7 +6,46 @@
              xmlns:local="clr-namespace:RoBotUserApp.Pages"
              Width="1400" Height="1000"
              Background="#FFFAFAFA">
-    <Grid>
-            
+    <Grid Margin="10">
+        <!-- Define 2 columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Define 5 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Voice Message input field -->
+        <TextBlock x:Name="VoiceMessagePhoneNumberTextBlock"
+                   Text="Səs mesajı yönləndiriləcək nömrə"
+                   Grid.Column="0" 
+                   Grid.Row="0"/>
+        
+        <TextBox x:Name="VoiceMessagePhoneNumberTextBox"
+                 Width="250"
+                 Grid.Column="1" 
+                 Grid.Row="0"/>
+
+        
+        
+        
+        
+        
+        <!-- Button to save settings -->
+        <Button x:Name="SaveBtn"
+            Content="Yadda saxla"
+            Width="150"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="SaveBtn_Click"
+            Grid.Column="1" 
+            Grid.Row="10"/>
     </Grid>
 </UserControl>

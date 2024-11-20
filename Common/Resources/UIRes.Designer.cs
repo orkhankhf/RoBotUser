@@ -223,6 +223,24 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yadda saxla.
+        /// </summary>
+        public static string SettingsOperations_SaveBtn {
+            get {
+                return ResourceManager.GetString("SettingsOperations_SaveBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Səs mesajı yönləndiriləcək nömrə.
+        /// </summary>
+        public static string SettingsOperations_VoiceMessagePhoneNumberTextBlock {
+            get {
+                return ResourceManager.GetString("SettingsOperations_VoiceMessagePhoneNumberTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Müştərilərə mesaj göndər.
         /// </summary>
         public static string WhatsappOperations_SendMessagesBtn {
