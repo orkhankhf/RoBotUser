@@ -9,13 +9,13 @@
         <!-- Token Input Section -->
         <StackPanel x:Name="LoginStackPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
             <!-- Token TextBox -->
-            <TextBox x:Name="TokenTextBox" Width="600" Text="2564c0a40f6443d1aaabc87f659a77f70e1eadc02f544c61a242caee945e2a485f056f6e12884c0db23e789385f7bbad"/>
+            <TextBox x:Name="TokenTextBox" Width="600" Text="7850b52e301c4b9ea48cc46eba93ace1b0d02f10e9ba4f6b972dd91edc490cb4305e7dcc3b4d4e2bac79abfb513e1b02"/>
 
             <!-- Validate Button -->
             <Button x:Name="LoginWithTokenBtn" HorizontalAlignment="Center" Content="Tokenlə Giriş" Width="150" Click="LoginWithTokenBtn_Click" />
         </StackPanel>
         
-        <Button Content="Çıxış" Width="60" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0" Click="RestartAppBtn_Click" Panel.ZIndex="1" />
+        <Button x:Name="ExitAppBtn" Content="Çıxış" Width="60" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,925,10,0" Click="RestartAppBtn_Click" Panel.ZIndex="1" />
         
         <!-- Main Tab Menu -->
         <TabControl x:Name="MainTabControl" SelectedIndex="0" Visibility="Collapsed">

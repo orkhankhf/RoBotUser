@@ -106,6 +106,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Çıxış.
+        /// </summary>
+        public static string ExitAppBtn {
+            get {
+                return ResourceManager.GetString("ExitAppBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin şifrəsi yalnışdır!.
         /// </summary>
         public static string General_AdminPasswordIsWrong {
@@ -210,6 +219,24 @@ namespace Common.Resources {
         public static string MainWindow_WhatsappOperationsTab {
             get {
                 return ResourceManager.GetString("MainWindow_WhatsappOperationsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Müştərilərə mesaj göndər.
+        /// </summary>
+        public static string WhatsappOperations_SendMessagesBtn {
+            get {
+                return ResourceManager.GetString("WhatsappOperations_SendMessagesBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Səs mesajı göndərilsin.
+        /// </summary>
+        public static string WhatsappOperations_SendVoiceMessageText {
+            get {
+                return ResourceManager.GetString("WhatsappOperations_SendVoiceMessageText", resourceCulture);
             }
         }
     }

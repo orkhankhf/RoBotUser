@@ -168,4 +168,13 @@
   <data name="DataOperations_NewNumbersSaved" xml:space="preserve">
     <value>Yeni nömrələr yaddaşa yazıldı!</value>
   </data>
+  <data name="WhatsappOperations_SendMessagesBtn" xml:space="preserve">
+    <value>Müştərilərə mesaj göndər</value>
+  </data>
+  <data name="WhatsappOperations_SendVoiceMessageText" xml:space="preserve">
+    <value>Səs mesajı göndərilsin</value>
+  </data>
+  <data name="ExitAppBtn" xml:space="preserve">
+    <value>Çıxış</value>
+  </data>
 </root>

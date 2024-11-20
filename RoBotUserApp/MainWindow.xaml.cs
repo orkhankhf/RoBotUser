@@ -2,6 +2,7 @@
 using Common.Helpers;
 using Common.Resources;
 using Entities.Enums;
+using Entities.Models;
 using Entities.RequestModels;
 using Microsoft.Extensions.DependencyInjection;
 using RoBotApp;
@@ -12,6 +13,7 @@ namespace RoBotUserApp
 {
     public partial class MainWindow : Window
     {
+        private WhatsappOperations _whatsappOperationsPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace RoBotUserApp
             DataOperationsTab.Header = UIRes.MainWindow_DataOperationsTab;
             WhatsappOperationsTab.Header = UIRes.MainWindow_WhatsappOperationsTab;
             SettingsOperationsTab.Header = UIRes.MainWindow_SettingsOperationsTab;
+            ExitAppBtn.Content = UIRes.ExitAppBtn;
         }
 
         private void DisableMainGrid(object sender, bool disable)
@@ -47,10 +50,17 @@ namespace RoBotUserApp
         private void LoadWhatsappOperationsPage()
         {
             // Load Data Operations Page
-            WhatsappOperations whatsappOperationsPage = new WhatsappOperations();
-            whatsappOperationsPage.DisableMainGrid += DisableMainGrid;
-            WhatsappOperationsContent.Content = whatsappOperationsPage;
+            _whatsappOperationsPage = new WhatsappOperations();
+
+            _whatsappOperationsPage.DisableMainGrid += DisableMainGrid;
+            WhatsappOperationsContent.Content = _whatsappOperationsPage;
             WhatsappOperationsTab.Visibility = Visibility.Visible;
+
+            //permission state changer for send voice messages
+            _whatsappOperationsPage.CanSendVoiceMessage += isEnabled =>
+            {
+                _whatsappOperationsPage.CanSendVoiceMessageState(isEnabled);
+            };
         }
 
         private void LoadSettingsOperationsPage()
@@ -60,6 +70,20 @@ namespace RoBotUserApp
             settingsOperationsPage.DisableMainGrid += DisableMainGrid;
             SettingsOperationsContent.Content = settingsOperationsPage;
             SettingsOperationsTab.Visibility = Visibility.Visible;
+        }
+
+        private void LoadAllPages()
+        {
+            // Hide all tabs by default
+            HideAllTabs();
+
+            LoadDataOperationsPage();
+            LoadWhatsappOperationsPage();
+            LoadSettingsOperationsPage();
+
+            // Show the tab control after permissions are applied
+            LoginStackPanel.Visibility = Visibility.Hidden;
+            MainTabControl.Visibility = Visibility.Visible;
         }
 
         private void HideAllTabs()
@@ -72,36 +96,13 @@ namespace RoBotUserApp
         #endregion
 
         
-        private void ApplyRolePermissions(RoleEnum role)
+        private void ApplyRolePermissions(List<Permission> permissions)
         {
-            HideAllTabs(); // Hide all tabs by default
-
-            switch (role)
+            //can send voice message
+            if (permissions.FirstOrDefault(m => m.PermissionFor == PermissionEnum.CanSendVoiceMessage && m.Value == 1) == null)
             {
-                case RoleEnum.Standart:
-                    LoadDataOperationsPage();
-                    LoadWhatsappOperationsPage();
-                    LoadSettingsOperationsPage();
-                    break;
-                case RoleEnum.Premium:
-                    LoadDataOperationsPage();
-                    LoadWhatsappOperationsPage();
-                    LoadSettingsOperationsPage();
-                    break;
-                case RoleEnum.PremiumPlus:
-                    LoadDataOperationsPage();
-                    LoadWhatsappOperationsPage();
-                    LoadSettingsOperationsPage();
-                    break;
-                case RoleEnum.Individual:
-                    LoadDataOperationsPage();
-                    LoadWhatsappOperationsPage();
-                    LoadSettingsOperationsPage();
-                    break;
+                _whatsappOperationsPage?.CanSendVoiceMessageState(false); // Disable checkbox
             }
-
-            LoginStackPanel.Visibility = Visibility.Hidden;
-            MainTabControl.Visibility = Visibility.Visible; // Show the tab control after permissions are applied
         }
 
         #region TextBox And Button Events
@@ -115,18 +116,22 @@ namespace RoBotUserApp
                 return;
             }
 
-            string apiUrl = $"/UserToken/GetRoleByToken/{token}";
+            string apiUrl = $"/UserToken/AuthByToken/{token}";
 
-            var res = await RequestHelper.GetAsync<GetRoleByTokenResponse>(apiUrl);
+            var res = await RequestHelper.GetAsync<AuthByTokenResponse>(apiUrl);
             
             if (res.Success)
             {
-                //Apply role permissions
-                ApplyRolePermissions(res.Data.Role);
-
                 //assign user settings
                 UserSettings.Token = token;
                 UserSettings.UserRole = res.Data.Role;
+                UserSettings.Permissions = res.Data.Permissions;
+                UserSettings.UserAppSettings = res.Data.UserAppSettings;
+
+                LoadAllPages();
+
+                //Apply role permissions
+                ApplyRolePermissions(UserSettings.Permissions);
             }
             else
             {
