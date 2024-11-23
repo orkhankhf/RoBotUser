@@ -165,9 +165,6 @@
   <data name="DataOperations_RemainingTimeLimitIssue" xml:space="preserve">
     <value>Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}</value>
   </data>
-  <data name="DataOperations_NewNumbersSaved" xml:space="preserve">
-    <value>Yeni nömrələr yaddaşa yazıldı!</value>
-  </data>
   <data name="WhatsappOperations_SendMessagesBtn" xml:space="preserve">
     <value>Müştərilərə mesaj göndər</value>
   </data>
@@ -182,5 +179,17 @@
   </data>
   <data name="SettingsOperations_SaveBtn" xml:space="preserve">
     <value>Yadda saxla</value>
+  </data>
+  <data name="SettingsOperations_EnterPhoneNumber" xml:space="preserve">
+    <value>Telefon nömrəsi daxil edilməyib!</value>
+  </data>
+  <data name="General_ChangesSaved" xml:space="preserve">
+    <value>Dəyişikliklər yadda saxlanıldı!</value>
+  </data>
+  <data name="General_UnexpectedErrorOccured" xml:space="preserve">
+    <value>Gözlənilməyən xəta baş verdi!</value>
+  </data>
+  <data name="MainWindow_MessageOperationsTab" xml:space="preserve">
+    <value>Şablon Mesajlar</value>
   </data>
 </root>

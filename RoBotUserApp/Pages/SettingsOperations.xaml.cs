@@ -4,6 +4,10 @@ using System.Windows.Controls;
 using Common.Resources;
 using Common;
 using Entities.Enums;
+using Common.Helpers;
+using Entities.RequestModels;
+using System.Windows;
+using Entities.Models;
 
 namespace RoBotUserApp.Pages
 {
@@ -31,9 +35,56 @@ namespace RoBotUserApp.Pages
         }
 
         #region TextBox And Button Events
-        private void SaveBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void SaveBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // Disable the entire UI
+            DisableMainGrid?.Invoke(this, true);
 
+            try
+            {
+                var voiceMessagePhoneNumberValue = VoiceMessagePhoneNumberTextBox.Text;
+
+                if (string.IsNullOrWhiteSpace(voiceMessagePhoneNumberValue))
+                {
+                    MessageBox.Show(UIRes.SettingsOperations_EnterPhoneNumber, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Prepare the settings list
+                var settings = new List<UserAppSettingRequest>
+                {
+                    new UserAppSettingRequest
+                    {
+                        Key = UserAppSettingKeyEnum.VoiceMessagePhoneNumber,
+                        Value = voiceMessagePhoneNumberValue
+                    }
+                };
+
+                // API request payload
+                var request = new AddOrUpdateSettingRequest {
+                    Settings = settings
+                };
+
+                // API call
+                string apiUrl = "/UserAppSettings/AddOrUpdateSettings";
+                var response = await RequestHelper.PostAsync<AddOrUpdateSettingRequest, OperationResult>(apiUrl, request);
+
+                if (response.Success && response.Data.IsSuccessful)
+                {
+                    MessageBox.Show(UIRes.General_ChangesSaved, UIRes.General_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show(UIRes.General_UnexpectedErrorOccured, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(UIRes.General_UnexpectedErrorOccured, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            // Enable the entire UI
+            DisableMainGrid?.Invoke(this, false); // Enable MainGrid
         }
         #endregion
     }

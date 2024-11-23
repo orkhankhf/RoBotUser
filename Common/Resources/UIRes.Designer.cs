@@ -88,15 +88,6 @@ namespace Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yeni nömrələr yaddaşa yazıldı!.
-        /// </summary>
-        public static string DataOperations_NewNumbersSaved {
-            get {
-                return ResourceManager.GetString("DataOperations_NewNumbersSaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}.
         /// </summary>
         public static string DataOperations_RemainingTimeLimitIssue {
@@ -138,6 +129,15 @@ namespace Common.Resources {
         public static string General_Attention {
             get {
                 return ResourceManager.GetString("General_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dəyişikliklər yadda saxlanıldı!.
+        /// </summary>
+        public static string General_ChangesSaved {
+            get {
+                return ResourceManager.GetString("General_ChangesSaved", resourceCulture);
             }
         }
         
@@ -196,11 +196,29 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gözlənilməyən xəta baş verdi!.
+        /// </summary>
+        public static string General_UnexpectedErrorOccured {
+            get {
+                return ResourceManager.GetString("General_UnexpectedErrorOccured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Məlumat Əməliyyatları.
         /// </summary>
         public static string MainWindow_DataOperationsTab {
             get {
                 return ResourceManager.GetString("MainWindow_DataOperationsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Şablon Mesajlar.
+        /// </summary>
+        public static string MainWindow_MessageOperationsTab {
+            get {
+                return ResourceManager.GetString("MainWindow_MessageOperationsTab", resourceCulture);
             }
         }
         
@@ -219,6 +237,15 @@ namespace Common.Resources {
         public static string MainWindow_WhatsappOperationsTab {
             get {
                 return ResourceManager.GetString("MainWindow_WhatsappOperationsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon nömrəsi daxil edilməyib!.
+        /// </summary>
+        public static string SettingsOperations_EnterPhoneNumber {
+            get {
+                return ResourceManager.GetString("SettingsOperations_EnterPhoneNumber", resourceCulture);
             }
         }
         

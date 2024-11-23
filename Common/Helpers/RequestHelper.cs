@@ -1,4 +1,5 @@
 ﻿using Entities.RequestModels;
+using System.Text;
 using System.Text.Json;
 
 namespace Common.Helpers
@@ -8,12 +9,109 @@ namespace Common.Helpers
         private static readonly HttpClient _httpClient = new HttpClient();
         private static string BaseUrl = AppSettings.Api.BaseUrl;
 
+        // Helper method to add headers
+        private static void AddUserTokenHeader(HttpRequestMessage request)
+        {
+            if (!string.IsNullOrEmpty(UserSettings.Token))
+            {
+                request.Headers.Add("userToken", UserSettings.Token);
+            }
+        }
+
+        //GET method
         public static async Task<ApiResponse<T>> GetAsync<T>(string url)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync(BaseUrl+url);
+            var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl + url);
+
+            AddUserTokenHeader(request); // Add the user token header
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<ApiResponse<T>>(jsonResponse);
+
+            return result;
+        }
+
+        //POST method
+        public static async Task<ApiResponse<TResponse>> PostAsync<TRequest, TResponse>(string url, TRequest data)
+        {
+            var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl + url)
+            {
+                Content = content
+            };
+
+            AddUserTokenHeader(request); // Add the user token header
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
+
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new ApiResponse<TResponse>
+                {
+                    Success = false,
+                    ErrorMessage = response.ReasonPhrase,
+                    StatusCode = (int)response.StatusCode
+                };
+            }
+
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<ApiResponse<TResponse>>(jsonResponse);
+
+            return result;
+        }
+
+        // PUT method
+        public static async Task<ApiResponse<TResponse>> PutAsync<TRequest, TResponse>(string url, TRequest data)
+        {
+            var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Put, BaseUrl + url)
+            {
+                Content = content
+            };
+
+            AddUserTokenHeader(request); // Add the user token header
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new ApiResponse<TResponse>
+                {
+                    Success = false,
+                    ErrorMessage = response.ReasonPhrase,
+                    StatusCode = (int)response.StatusCode
+                };
+            }
+
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<ApiResponse<TResponse>>(jsonResponse);
+
+            return result;
+        }
+
+        // DELETE method
+        public static async Task<ApiResponse<TResponse>> DeleteAsync<TResponse>(string url)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, BaseUrl + url);
+            AddUserTokenHeader(request); // Add the user token header
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new ApiResponse<TResponse>
+                {
+                    Success = false,
+                    ErrorMessage = response.ReasonPhrase,
+                    StatusCode = (int)response.StatusCode
+                };
+            }
+
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<ApiResponse<TResponse>>(jsonResponse);
 
             return result;
         }

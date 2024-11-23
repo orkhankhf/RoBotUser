@@ -1,77 +1,40 @@
---------------------------------------------UrlsToProcess--------------------------------------------
-SELECT * FROM [dbo].[UrlsToProcess] order by Id desc
+--Update DataFetchIntervals
+update DataFetchIntervals set LastDataUpdate='2024-11-17 00:51:39.1386230'
 
---Get duplicates
-SELECT 
-    url, 
-    COUNT(*) AS DuplicateCount
-FROM 
-    UrlsToProcess
-GROUP BY 
-    url
-HAVING 
-    COUNT(*) > 1;
+--Count PhoneNumbers
+select count(*) from PhoneNumbers where FormattedNumber='0504469493'
 
---Count processed urls
-select count(*) FROM [dbo].[UrlsToProcess] where IsProcessed = 1
+--Count TurboAzAdInfos
+select count(*) from TurboAzAdInfos;
+
+--Count UrlsToProcess
+select count(*) FROM [dbo].[UrlsToProcess] where IsProcessed = 0
+
+--Delete urls which is not processed
+--delete from UrlsToProcess where IsProcessed = 0
+
+--Get duplicates in UrlsToProcess
+SELECT url, COUNT(*) AS DuplicateCount FROM UrlsToProcess GROUP BY url HAVING COUNT(*) > 1;
 
 --Delete duplicates but keep orginal URLs
-WITH CTE AS (
-    SELECT 
-        id,
-        url,
-        ROW_NUMBER() OVER (PARTITION BY url ORDER BY id) AS RowNum
-    FROM 
-        UrlsToProcess
-)
-DELETE FROM UrlsToProcess
-WHERE id IN (
-    SELECT id
-    FROM CTE
-    WHERE RowNum > 1
-);
+--WITH CTE AS (SELECT id, url, ROW_NUMBER() OVER (PARTITION BY url ORDER BY id) AS RowNum FROM UrlsToProcess) DELETE FROM UrlsToProcess WHERE id IN (SELECT id FROM CTE WHERE RowNum > 1);
+
+--Get duplicates in PhoneNumbers
+SELECT FormattedNumber, COUNT(*) AS FormattedNumber FROM PhoneNumbers GROUP BY FormattedNumber HAVING COUNT(*) > 1;
 
 
 
---------------------------------------------PhoneNumbers--------------------------------------------
-select * from PhoneNumbers order by Id desc;
-select count(*) from PhoneNumbers
-
---Get duplicates
-SELECT 
-    FormattedNumber, 
-    COUNT(*) AS FormattedNumber
-FROM 
-    PhoneNumbers
-GROUP BY 
-    FormattedNumber
-HAVING 
-    COUNT(*) > 1;
 
 
---Delete duplicates but keep orginal phone numbers
-WITH CTE AS (
-    SELECT 
-        id,
-        FormattedNumber,
-        ROW_NUMBER() OVER (PARTITION BY FormattedNumber ORDER BY id) AS RowNum
-    FROM 
-        PhoneNumbers
-)
-DELETE FROM PhoneNumbers
-WHERE id IN (
-    SELECT id
-    FROM CTE
-    WHERE RowNum > 1
-);
 
---------------------------------------------PhoneNumbers--------------------------------------------
 select * from [Permissions];
 
 
 select * from DataFetchIntervals;
-
+delete from [Permissions]
 
 select * from UserTokens;
+delete from UserTokens
 
-select * from TurboAzAdInfos order by Id desc
+
+select * from AppSettings

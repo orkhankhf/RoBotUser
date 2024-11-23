@@ -3,7 +3,6 @@ using NLogLogger = NLog.ILogger;
 using System.Windows.Controls;
 using System.Windows;
 using Common.Resources;
-using Common;
 
 namespace RoBotUserApp.Pages
 {

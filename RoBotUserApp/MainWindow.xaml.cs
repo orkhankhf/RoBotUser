@@ -4,8 +4,6 @@ using Common.Resources;
 using Entities.Enums;
 using Entities.Models;
 using Entities.RequestModels;
-using Microsoft.Extensions.DependencyInjection;
-using RoBotApp;
 using RoBotUserApp.Pages;
 using System.Windows;
 
@@ -72,6 +70,15 @@ namespace RoBotUserApp
             SettingsOperationsTab.Visibility = Visibility.Visible;
         }
 
+        private void LoadMessageOperationsPage()
+        {
+            // Load Data Operations Page
+            MessageOperations messageOperationsPage = new MessageOperations();
+            messageOperationsPage.DisableMainGrid += DisableMainGrid;
+            MessageOperationsContent.Content = messageOperationsPage;
+            MessageOperationsTab.Visibility = Visibility.Visible;
+        }
+
         private void LoadAllPages()
         {
             // Hide all tabs by default
@@ -80,6 +87,7 @@ namespace RoBotUserApp
             LoadDataOperationsPage();
             LoadWhatsappOperationsPage();
             LoadSettingsOperationsPage();
+            LoadMessageOperationsPage();
 
             // Show the tab control after permissions are applied
             LoginStackPanel.Visibility = Visibility.Hidden;

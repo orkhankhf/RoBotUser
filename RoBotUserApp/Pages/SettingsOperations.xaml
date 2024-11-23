@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RoBotUserApp.Pages"
-             Width="1400" Height="1000"
+             Width="1400" Height="920"
              Background="#FFFAFAFA">
     <Grid Margin="10">
         <!-- Define 2 columns -->
@@ -42,10 +42,10 @@
         <Button x:Name="SaveBtn"
             Content="Yadda saxla"
             Width="150"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Click="SaveBtn_Click"
-            Grid.Column="1" 
+            Grid.Column="0" 
             Grid.Row="10"/>
     </Grid>
 </UserControl>

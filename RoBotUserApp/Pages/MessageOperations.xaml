@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="RoBotUserApp.Pages.MessageOperations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RoBotUserApp.Pages"
+             mc:Ignorable="d" 
+             Width="1400" Height="920"
+             Background="#FFFAFAFA">
+    <Grid Margin="10">
+        <!-- Define 2 columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Define rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Text="Mesaj Şablonları" FontSize="16" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Margin="5" />
+
+        <!-- Dynamic Message Template List -->
+        <ScrollViewer Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="MessageTemplatesPanel" Margin="5">
+                <!-- Dynamic message templates will be added here -->
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Add Message Button -->
+        <Button x:Name="AddMessageBtn"
+                Content="Şablon əlavə et +"
+                Width="200"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="0"
+                Grid.Row="2"
+                Margin="5"
+                Click="AddMessageBtn_Click" />
+    </Grid>
+</UserControl>

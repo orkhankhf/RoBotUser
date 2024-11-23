@@ -1,7 +1,6 @@
 ﻿using Data.Context;
 using Data.Interfaces;
 using Data.Repositories;
-using Entities.Models;
 
 namespace Data.UnitOfWork
 {
