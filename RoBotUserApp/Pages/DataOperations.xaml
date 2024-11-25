@@ -15,13 +15,53 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Example elements for each cell -->
-        <!-- Row 1 -->
-        <Button x:Name="LoadNewNumbersBtn" Content="Yeni nömrələri yüklə" Margin="0" Grid.Column="0" Grid.Row="0" Click="LoadNewNumbersBtn_Click" />
+        <!-- Statistics Section -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
+            <Grid>
+                <!-- Two columns for "Statistika" and "Refresh" -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Statistika Text -->
+                <TextBlock Text="Statistika" FontSize="18" FontWeight="Bold" Grid.Column="0" VerticalAlignment="Center" />
+
+                <!-- Refresh Button -->
+                <Button x:Name="RefreshStatisticsBtn"
+                        Content="Yenilə"
+                        Width="100"
+                        HorizontalAlignment="Right"
+                        Height="30"
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        Click="RefreshStatisticsBtn_Click" />
+            </Grid>
+            <TextBlock x:Name="TotalAssignedNumbersCountText" Text="Təyin edilmiş nömrələr: 0" />
+            <TextBlock x:Name="WaitingForSendingMessageCountText" Text="Göndərilmək üçün gözləyən nömrələr: 0" />
+            <TextBlock x:Name="SentMessageNumberCountText" Text="Mesaj göndərilən nömrələr: 0" />
+            <TextBlock x:Name="LastAssignTimeText" Text="Son yenilənmə vaxtı: -" />
+            <TextBlock x:Name="LimitPerRequestText" Text="Hər yenilənmədə əldə olunan nömrə: 0" />
+        </StackPanel>
+
+        <!-- Assign Button -->
+        <Button x:Name="AssignNewNumbersBtn"
+                Content="Yeni nömrələr təyin et"
+                Margin="10"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="0"
+                Grid.Row="1"
+                Click="AssignNewNumbersBtn_Click" />
+
+        <!-- Additional Content Placeholder -->
+        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="10">
+            <!-- Future content can go here -->
+        </StackPanel>
     </Grid>
 </UserControl>

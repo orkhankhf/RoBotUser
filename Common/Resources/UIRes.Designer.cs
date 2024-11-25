@@ -79,11 +79,29 @@ namespace Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yeni nömrələri yüklə.
+        ///   Looks up a localized string similar to Yeni nömrələr təyin et.
         /// </summary>
-        public static string DataOperations_LoadNewNumbersBtn {
+        public static string DataOperations_AssignNewNumbersBtn {
             get {
-                return ResourceManager.GetString("DataOperations_LoadNewNumbersBtn", resourceCulture);
+                return ResourceManager.GetString("DataOperations_AssignNewNumbersBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Son yenilənmə vaxtı: {0}.
+        /// </summary>
+        public static string DataOperations_LastAssignTimeText {
+            get {
+                return ResourceManager.GetString("DataOperations_LastAssignTimeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hər yenilənmədə əldə olunan nömrə: {0}.
+        /// </summary>
+        public static string DataOperations_LimitPerRequestText {
+            get {
+                return ResourceManager.GetString("DataOperations_LimitPerRequestText", resourceCulture);
             }
         }
         
@@ -93,6 +111,33 @@ namespace Common.Resources {
         public static string DataOperations_RemainingTimeLimitIssue {
             get {
                 return ResourceManager.GetString("DataOperations_RemainingTimeLimitIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesaj göndərilən nömrələr: {0}.
+        /// </summary>
+        public static string DataOperations_SentMessageNumberCountText {
+            get {
+                return ResourceManager.GetString("DataOperations_SentMessageNumberCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Təyin edilmiş nömrələr: {0}.
+        /// </summary>
+        public static string DataOperations_TotalAssignedNumbersCountText {
+            get {
+                return ResourceManager.GetString("DataOperations_TotalAssignedNumbersCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Göndərilmək üçün gözləyən nömrələr: {0}.
+        /// </summary>
+        public static string DataOperations_WaitingForSendingMessageCountText {
+            get {
+                return ResourceManager.GetString("DataOperations_WaitingForSendingMessageCountText", resourceCulture);
             }
         }
         
