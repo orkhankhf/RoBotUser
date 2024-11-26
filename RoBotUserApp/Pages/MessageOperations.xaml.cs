@@ -38,12 +38,12 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.CantLoadMessageTemplates, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessagesRes.CantLoadMessageTemplates, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
@@ -131,13 +131,13 @@ namespace RoBotUserApp.Pages
 
                 if (string.IsNullOrWhiteSpace(messageContent))
                 {
-                    UIHelper.Popup(PopupMessages.MessageCantBeEmpty, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessagesRes.MessageCantBeEmpty, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (messageContent.Length > MaxMessageLength)
                 {
-                    UIHelper.Popup(string.Format(PopupMessages.MessageMaxLengthExceeded, MaxMessageLength), PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(string.Format(PopupMessagesRes.MessageMaxLengthExceeded, MaxMessageLength), PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -159,11 +159,11 @@ namespace RoBotUserApp.Pages
                         if (response.Success)
                         {
                             textBox.Tag = response.Data.Id; // Update the TextBox Tag with the new message ID
-                            UIHelper.Popup(PopupMessages.AddedNewMessage, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
+                            UIHelper.Popup(PopupMessagesRes.AddedNewMessage, PopupMessagesRes.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            UIHelper.Popup(PopupMessages.ErrorWhileAddingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                            UIHelper.Popup(PopupMessagesRes.ErrorWhileAddingMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -179,17 +179,17 @@ namespace RoBotUserApp.Pages
 
                         if (response.Success && response.Data.IsSuccessful)
                         {
-                            UIHelper.Popup(PopupMessages.MessageUpdated, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
+                            UIHelper.Popup(PopupMessagesRes.MessageUpdated, PopupMessagesRes.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                            UIHelper.Popup(PopupMessagesRes.ErrorWhileUpdatingMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.ErrorWhileUpdatingMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
@@ -218,16 +218,16 @@ namespace RoBotUserApp.Pages
                 if (response.Success && response.Data.IsSuccessful)
                 {
                     RemoveMessageTemplateFromUI(button);
-                    UIHelper.Popup(PopupMessages.MessageDeleted, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
+                    UIHelper.Popup(PopupMessagesRes.MessageDeleted, PopupMessagesRes.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    UIHelper.Popup(PopupMessages.ErrorWhileDeletingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.ErrorWhileDeletingMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                UIHelper.Popup(PopupMessages.ErrorWhileDeletingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessagesRes.ErrorWhileDeletingMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call

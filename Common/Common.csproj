@@ -40,10 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\PopupMessages.Designer.cs">
+    <Compile Update="Resources\PopupMessagesRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PopupMessages.resx</DependentUpon>
+      <DependentUpon>PopupMessagesRes.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\LogMessagesRes.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -58,9 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\PopupMessages.resx">
+    <EmbeddedResource Update="Resources\PopupMessagesRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PopupMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>PopupMessagesRes.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\LogMessagesRes.resx">

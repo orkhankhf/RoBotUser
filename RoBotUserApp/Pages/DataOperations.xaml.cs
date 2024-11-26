@@ -50,12 +50,12 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    UIHelper.Popup(PopupMessages.StatisticsNotLoaded, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.StatisticsNotLoaded, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch
             {
-                UIHelper.Popup(PopupMessages.StatisticsNotLoaded, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessagesRes.StatisticsNotLoaded, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -86,21 +86,21 @@ namespace RoBotUserApp.Pages
                     {
                         var remainingTime = response.Data.RemainingWaitTime.Value;
                         TimeSpan truncatedRemainingTime = new TimeSpan(remainingTime.Hours, remainingTime.Minutes, remainingTime.Seconds);
-                        UIHelper.Popup(string.Format(PopupMessages.RemainingTimeLimitIssue, truncatedRemainingTime), PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        UIHelper.Popup(string.Format(PopupMessagesRes.RemainingTimeLimitIssue, truncatedRemainingTime), PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                     else
                     {
-                        UIHelper.Popup(PopupMessages.NumbersAssigned, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
+                        UIHelper.Popup(PopupMessagesRes.NumbersAssigned, PopupMessagesRes.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else
                 {
-                    UIHelper.Popup(string.Format(PopupMessages.ErrorWhileAssignNumbers, response.ErrorMessage), PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(string.Format(PopupMessagesRes.ErrorWhileAssignNumbers, response.ErrorMessage), PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                UIHelper.Popup(string.Format(PopupMessages.ErrorWhileAssignNumbers, ex.Message), PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(string.Format(PopupMessagesRes.ErrorWhileAssignNumbers, ex.Message), PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call

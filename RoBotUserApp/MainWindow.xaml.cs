@@ -121,7 +121,7 @@ namespace RoBotUserApp
 
             if (string.IsNullOrWhiteSpace(token))
             {
-                UIHelper.Popup(PopupMessages.General_PleaseEnterValidToken, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                UIHelper.Popup(PopupMessagesRes.General_PleaseEnterValidToken, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -144,7 +144,7 @@ namespace RoBotUserApp
             }
             else
             {
-                UIHelper.Popup(res.ErrorMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(res.ErrorMessage, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

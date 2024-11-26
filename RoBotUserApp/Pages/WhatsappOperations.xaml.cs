@@ -44,13 +44,13 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.CantLoadMessageTemplates, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                     return new List<Message>();
                 }
             }
             catch (Exception ex)
             {
-                UIHelper.Popup("Mesajları yükləyərkən bir xəta baş verdi.", PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup("Mesajları yükləyərkən bir xəta baş verdi.", PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Message>();
             }
         }
@@ -71,7 +71,7 @@ namespace RoBotUserApp.Pages
 
                 if (messages.Count == 0)
                 {
-                    UIHelper.Popup(PopupMessages.NoExistingMessageTemplates, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessagesRes.NoExistingMessageTemplates, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     // Enable the entire UI
                     UIHelper.ToggleMainGridState(false, DisableMainGrid);
                     return;
@@ -79,7 +79,7 @@ namespace RoBotUserApp.Pages
                 var voiceMessagePhoneNumber = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.VoiceMessagePhoneNumber)?.Value;
 
                 if (SendVoiceMessage && voiceMessagePhoneNumber == "+000000000000") {
-                    UIHelper.Popup(PopupMessages.VoiceMessageNumberShouldBeChanged, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessagesRes.VoiceMessageNumberShouldBeChanged, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     // Enable the entire UI
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -90,7 +90,7 @@ namespace RoBotUserApp.Pages
 
                 if (response.Data.PhoneNumbers.Count == 0)
                 {
-                    UIHelper.Popup(PopupMessages.NoAnyAssignedNumber, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessagesRes.NoAnyAssignedNumber, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     // Enable the entire UI
                     UIHelper.ToggleMainGridState(false, DisableMainGrid);
                     return;
@@ -119,7 +119,7 @@ namespace RoBotUserApp.Pages
 
                     if (!responseMarkPhoneNumberAsSent.Success)
                     {
-                        UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessageStatus, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                        UIHelper.Popup(PopupMessagesRes.ErrorWhileUpdatingMessageStatus, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                         // Enable the entire UI
                         UIHelper.ToggleMainGridState(false, DisableMainGrid);
                         break;
@@ -128,7 +128,7 @@ namespace RoBotUserApp.Pages
             }
             else
             {
-                UIHelper.Popup(PopupMessages.CantLoadNumbers, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessagesRes.CantLoadNumbers, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // Enable the entire UI

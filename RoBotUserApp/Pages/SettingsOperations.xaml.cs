@@ -59,7 +59,7 @@ namespace RoBotUserApp.Pages
 
                 if (string.IsNullOrWhiteSpace(voiceMessagePhoneNumberValue))
                 {
-                    UIHelper.Popup(PopupMessages.EnterPhoneNumber, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.EnterPhoneNumber, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -95,16 +95,16 @@ namespace RoBotUserApp.Pages
                         }
                     }
 
-                    UIHelper.Popup(PopupMessages.General_ChangesSaved, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
+                    UIHelper.Popup(PopupMessagesRes.General_ChangesSaved, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    UIHelper.Popup(PopupMessages.General_UnexpectedErrorOccured, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessagesRes.General_UnexpectedErrorOccured, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                UIHelper.Popup(PopupMessages.General_UnexpectedErrorOccured, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessagesRes.General_UnexpectedErrorOccured, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
             // Enable the entire UI
