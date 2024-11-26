@@ -95,7 +95,7 @@ namespace RoBotUserApp.Pages
                         }
                     }
 
-                    UIHelper.Popup(PopupMessagesRes.General_ChangesSaved, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
+                    UIHelper.Popup(PopupMessagesRes.General_ChangesSaved, PopupMessagesRes.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
