@@ -106,15 +106,6 @@ namespace Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}.
-        /// </summary>
-        public static string DataOperations_RemainingTimeLimitIssue {
-            get {
-                return ResourceManager.GetString("DataOperations_RemainingTimeLimitIssue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Mesaj göndərilən nömrələr: {0}.
         /// </summary>
         public static string DataOperations_SentMessageNumberCountText {
@@ -169,38 +160,11 @@ namespace Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diqqət!.
-        /// </summary>
-        public static string General_Attention {
-            get {
-                return ResourceManager.GetString("General_Attention", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dəyişikliklər yadda saxlanıldı!.
-        /// </summary>
-        public static string General_ChangesSaved {
-            get {
-                return ResourceManager.GetString("General_ChangesSaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Kopyalama.
         /// </summary>
         public static string General_Copy {
             get {
                 return ResourceManager.GetString("General_Copy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Xəta baş verdi!.
-        /// </summary>
-        public static string General_ErrorOccured {
-            get {
-                return ResourceManager.GetString("General_ErrorOccured", resourceCulture);
             }
         }
         
@@ -228,24 +192,6 @@ namespace Common.Resources {
         public static string General_Info {
             get {
                 return ResourceManager.GetString("General_Info", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Zəhmət olmasa düzgün token daxil edin!.
-        /// </summary>
-        public static string General_PleaseEnterValidToken {
-            get {
-                return ResourceManager.GetString("General_PleaseEnterValidToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gözlənilməyən xəta baş verdi!.
-        /// </summary>
-        public static string General_UnexpectedErrorOccured {
-            get {
-                return ResourceManager.GetString("General_UnexpectedErrorOccured", resourceCulture);
             }
         }
         
@@ -291,15 +237,6 @@ namespace Common.Resources {
         public static string SettingsOperations_ChromeTextBlock {
             get {
                 return ResourceManager.GetString("SettingsOperations_ChromeTextBlock", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Telefon nömrəsi daxil edilməyib!.
-        /// </summary>
-        public static string SettingsOperations_EnterPhoneNumber {
-            get {
-                return ResourceManager.GetString("SettingsOperations_EnterPhoneNumber", resourceCulture);
             }
         }
         

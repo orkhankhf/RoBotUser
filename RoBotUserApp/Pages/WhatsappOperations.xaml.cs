@@ -6,6 +6,9 @@ using Common.Resources;
 using Common.Helpers;
 using Entities.RequestModels;
 using Entities.Models;
+using Common;
+using Entities.Enums;
+using RoBotUserApp.UiHelpers;
 
 namespace RoBotUserApp.Pages
 {
@@ -41,13 +44,13 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Mesajları yükləmək mümkün olmadı.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                     return new List<Message>();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Mesajları yükləyərkən bir xəta baş verdi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup("Mesajları yükləyərkən bir xəta baş verdi.", PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Message>();
             }
         }
@@ -56,10 +59,7 @@ namespace RoBotUserApp.Pages
         private async void SendMessagesBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             // Disable the entire UI
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                DisableMainGrid?.Invoke(this, true);
-            });
+            UIHelper.ToggleMainGridState(true, DisableMainGrid);
 
             // Simulate API call to get phone numbers which not sent message
             string apiUrl = "/AssignedPhoneNumber/GetUnsentPhoneNumbers";
@@ -71,12 +71,28 @@ namespace RoBotUserApp.Pages
 
                 if (messages.Count == 0)
                 {
-                    MessageBox.Show("Mesaj şablonları mövcud deyil!", "Diqqət", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessages.NoExistingMessageTemplates, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // Enable the entire UI
+                    UIHelper.ToggleMainGridState(false, DisableMainGrid);
+                    return;
+                }
+                var voiceMessagePhoneNumber = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.VoiceMessagePhoneNumber)?.Value;
+
+                if (SendVoiceMessage && voiceMessagePhoneNumber == "+000000000000") {
+                    UIHelper.Popup(PopupMessages.VoiceMessageNumberShouldBeChanged, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     // Enable the entire UI
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         DisableMainGrid?.Invoke(this, false); // Enable MainGrid
                     });
+                    return;
+                }
+
+                if (response.Data.PhoneNumbers.Count == 0)
+                {
+                    UIHelper.Popup(PopupMessages.NoAnyAssignedNumber, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // Enable the entire UI
+                    UIHelper.ToggleMainGridState(false, DisableMainGrid);
                     return;
                 }
 
@@ -87,27 +103,36 @@ namespace RoBotUserApp.Pages
                 {
                     string message = messages[rand.Next(messages.Count)].Content;
 
-                    await WhatsappHelper.SendWhatsAppMessageAsync(phone, message, SendVoiceMessage);
+                    await WhatsappHelper.SendWhatsAppMessageAsync(phone.PhoneNumber, message, SendVoiceMessage);
 
-                    //var turboAzSetHasMessageSentOperation = new TurboAzSetHasMessageSentOperation
-                    //{
-                    //    Id = ad.Id
-                    //};
+                    //// Mark PhoneNumber as sent for user
+                    string apiUrlMarkPhoneNumberAsSent = "/AssignedPhoneNumber/MarkPhoneNumberAsSent";
 
-                    ////update HasMessageSent
-                    //await _turboAzAdInfoService.TurboAzSetHasMessageSentAsync(turboAzSetHasMessageSentOperation);
+                    // Prepare the request payload
+                    var request = new MarkPhoneNumberAsSentRequest
+                    {
+                        AssignedPhoneNumberId = phone.AssignedPhoneNumberId
+                    };
+
+                    // Send the POST request using the helper
+                    var responseMarkPhoneNumberAsSent = await RequestHelper.PostAsync<MarkPhoneNumberAsSentRequest, OperationResult>(apiUrlMarkPhoneNumberAsSent, request);
+
+                    if (!responseMarkPhoneNumberAsSent.Success)
+                    {
+                        UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessageStatus, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                        // Enable the entire UI
+                        UIHelper.ToggleMainGridState(false, DisableMainGrid);
+                        break;
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Nömrələr yüklənmədi!", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessages.CantLoadNumbers, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // Enable the entire UI
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                DisableMainGrid?.Invoke(this, false); // Enable MainGrid
-            });
+            UIHelper.ToggleMainGridState(false, DisableMainGrid);
         }
         private void SendVoiceMessageCheckBox_Toggle(object sender, RoutedEventArgs e)
         {

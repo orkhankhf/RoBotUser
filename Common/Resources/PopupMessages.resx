@@ -117,85 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="General_AdUpdated" xml:space="preserve">
-    <value>Elan yeniləndi!</value>
+  <data name="General_PleaseEnterValidToken" xml:space="preserve">
+    <value>Zəhmət olmasa düzgün token daxil edin!</value>
   </data>
-  <data name="General_Copy" xml:space="preserve">
-    <value>Kopyalama</value>
+  <data name="Title_Attention" xml:space="preserve">
+    <value>Diqqət!</value>
   </data>
-  <data name="General_IdNotFound" xml:space="preserve">
-    <value>Id tapılmadı!</value>
+  <data name="Title_ErrorOccured" xml:space="preserve">
+    <value>Xəta baş verdi!</value>
   </data>
-  <data name="General_Info" xml:space="preserve">
+  <data name="StatisticsNotLoaded" xml:space="preserve">
+    <value>Statistik məlumatlar yüklənmədi!</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Telefon nömrəsi daxil edilməyib!</value>
+  </data>
+  <data name="RemainingTimeLimitIssue" xml:space="preserve">
+    <value>Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}</value>
+  </data>
+  <data name="Title_Info" xml:space="preserve">
     <value>Məlumat</value>
   </data>
-  <data name="MainWindow_DataOperationsTab" xml:space="preserve">
-    <value>Məlumat Əməliyyatları</value>
+  <data name="NumbersAssigned" xml:space="preserve">
+    <value>Yeni nömrələr uğurla təyin edildi.</value>
   </data>
-  <data name="General_FeatureNotImplementedOrSupported" xml:space="preserve">
-    <value>Bu özəllik əlavə edilməyib və ya dəstəklənmir!</value>
+  <data name="ErrorWhileAssignNumbers" xml:space="preserve">
+    <value>Nömrələri təyin edərkən xəta baş verdi: {0}</value>
   </data>
-  <data name="API_TokenExpired" xml:space="preserve">
-    <value>Tokenin etibarlılıq müddəti bitib!</value>
+  <data name="General_ChangesSaved" xml:space="preserve">
+    <value>Dəyişikliklər yadda saxlanıldı!</value>
   </data>
-  <data name="API_TokenNotFound" xml:space="preserve">
-    <value>Token yalnışdır!</value>
+  <data name="General_UnexpectedErrorOccured" xml:space="preserve">
+    <value>Gözlənilməyən xəta baş verdi!</value>
   </data>
-  <data name="General_AdminPasswordIsWrong" xml:space="preserve">
-    <value>Admin şifrəsi yalnışdır!</value>
+  <data name="CantLoadMessageTemplates" xml:space="preserve">
+    <value>Mesajları yükləmək mümkün olmadı.</value>
   </data>
-  <data name="MainWindow_WhatsappOperationsTab" xml:space="preserve">
-    <value>Whatsapp Əməliyyatları</value>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>Mesaj yeniləndi.</value>
   </data>
-  <data name="MainWindow_SettingsOperationsTab" xml:space="preserve">
-    <value>Parametrlər</value>
+  <data name="ErrorWhileUpdatingMessage" xml:space="preserve">
+    <value>Mesaj yenilənərkən xəta baş verdi!</value>
   </data>
-  <data name="DataOperations_AssignNewNumbersBtn" xml:space="preserve">
-    <value>Yeni nömrələr təyin et</value>
+  <data name="MessageDeleted" xml:space="preserve">
+    <value>Mesaj silindi.</value>
   </data>
-  <data name="WhatsappOperations_SendMessagesBtn" xml:space="preserve">
-    <value>Müştərilərə mesaj göndər</value>
+  <data name="ErrorWhileDeletingMessage" xml:space="preserve">
+    <value>Mesaj silinərkən xəta baş verdi!</value>
   </data>
-  <data name="WhatsappOperations_SendVoiceMessageText" xml:space="preserve">
-    <value>Səs mesajı göndərilsin</value>
+  <data name="AddedNewMessage" xml:space="preserve">
+    <value>Yeni mesaj əlavə edildi.</value>
   </data>
-  <data name="ExitAppBtn" xml:space="preserve">
-    <value>Çıxış</value>
+  <data name="ErrorWhileAddingMessage" xml:space="preserve">
+    <value>Mesaj əlavə edilərkən xəta baş verdi!</value>
   </data>
-  <data name="SettingsOperations_VoiceMessagePhoneNumberTextBlock" xml:space="preserve">
-    <value>Səs mesajı yönləndiriləcək nömrə</value>
+  <data name="MessageCantBeEmpty" xml:space="preserve">
+    <value>Mesaj boş ola bilməz.</value>
   </data>
-  <data name="SettingsOperations_SaveBtn" xml:space="preserve">
-    <value>Yadda saxla</value>
+  <data name="MessageMaxLengthExceeded" xml:space="preserve">
+    <value>Mesaj {0} simvoldan çox ola bilməz.</value>
   </data>
-  <data name="MainWindow_MessageOperationsTab" xml:space="preserve">
-    <value>Şablon Mesajlar</value>
+  <data name="NoExistingMessageTemplates" xml:space="preserve">
+    <value>Mesaj şablonları mövcud deyil!</value>
   </data>
-  <data name="DataOperations_TotalAssignedNumbersCountText" xml:space="preserve">
-    <value>Təyin edilmiş nömrələr: {0}</value>
+  <data name="VoiceMessageNumberShouldBeChanged" xml:space="preserve">
+    <value>Səs mesajı göndəriləcək nömrə dəyişməlidir!</value>
   </data>
-  <data name="DataOperations_WaitingForSendingMessageCountText" xml:space="preserve">
-    <value>Göndərilmək üçün gözləyən nömrələr: {0}</value>
+  <data name="NoAnyAssignedNumber" xml:space="preserve">
+    <value>Nömrə siyahısı boşdur ya da mesaj göndərilməmiş nömrə yoxdur</value>
   </data>
-  <data name="DataOperations_SentMessageNumberCountText" xml:space="preserve">
-    <value>Mesaj göndərilən nömrələr: {0}</value>
+  <data name="ErrorWhileUpdatingMessageStatus" xml:space="preserve">
+    <value>Nömrə statusu dəyişdirilən zaman xəta baş verdi!</value>
   </data>
-  <data name="DataOperations_LastAssignTimeText" xml:space="preserve">
-    <value>Son yenilənmə vaxtı: {0}</value>
-  </data>
-  <data name="DataOperations_LimitPerRequestText" xml:space="preserve">
-    <value>Hər yenilənmədə əldə olunan nömrə: {0}</value>
-  </data>
-  <data name="WhatsappMessageUrlTextBlock" xml:space="preserve">
-    <value>Whatsapp URL</value>
-  </data>
-  <data name="SettingsOperations_ChromeTextBlock" xml:space="preserve">
-    <value>Browser</value>
-  </data>
-  <data name="SettingsOperations_WhatsAppTextBlock" xml:space="preserve">
-    <value>WhatsApp</value>
-  </data>
-  <data name="SettingsOperations_WhatsappMessageUrlTextBlock" xml:space="preserve">
-    <value>Whatsapp URL</value>
+  <data name="CantLoadNumbers" xml:space="preserve">
+    <value>Nömrələr yüklənmədi!</value>
   </data>
 </root>

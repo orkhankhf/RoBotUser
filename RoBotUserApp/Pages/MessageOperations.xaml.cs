@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Entities.RequestModels;
+using RoBotUserApp.UiHelpers;
+using Common.Resources;
 
 namespace RoBotUserApp.Pages
 {
@@ -20,7 +22,7 @@ namespace RoBotUserApp.Pages
 
         private async Task LoadExistingMessageTemplatesAsync()
         {
-            DisableMainGrid?.Invoke(this, true); // Disable UI during API call
+            UIHelper.ToggleMainGridState(true, DisableMainGrid); // Disable UI during API call
 
             try
             {
@@ -36,15 +38,15 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Mesajları yükləmək mümkün olmadı.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Mesajları yükləyərkən bir xəta baş verdi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessages.CantLoadMessageTemplates, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            DisableMainGrid?.Invoke(this, false); // Re-enable UI after API call
+            UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
         }
 
         private void AddMessageBtn_Click(object sender, RoutedEventArgs e)
@@ -129,17 +131,17 @@ namespace RoBotUserApp.Pages
 
                 if (string.IsNullOrWhiteSpace(messageContent))
                 {
-                    MessageBox.Show("Mesaj boş ola bilməz.", "Diqqət", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(PopupMessages.MessageCantBeEmpty, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (messageContent.Length > MaxMessageLength)
                 {
-                    MessageBox.Show($"Mesaj {MaxMessageLength} simvoldan çox ola bilməz.", "Diqqət", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UIHelper.Popup(string.Format(PopupMessages.MessageMaxLengthExceeded, MaxMessageLength), PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                DisableMainGrid?.Invoke(this, true); // Disable UI during API call
+                UIHelper.ToggleMainGridState(true, DisableMainGrid); // Disable UI during API call
 
                 try
                 {
@@ -157,11 +159,11 @@ namespace RoBotUserApp.Pages
                         if (response.Success)
                         {
                             textBox.Tag = response.Data.Id; // Update the TextBox Tag with the new message ID
-                            MessageBox.Show("Yeni mesaj əlavə edildi.", "Məlumat", MessageBoxButton.OK, MessageBoxImage.Information);
+                            UIHelper.Popup(PopupMessages.AddedNewMessage, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Mesaj əlavə edilə bilmədi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                            UIHelper.Popup(PopupMessages.ErrorWhileAddingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -177,20 +179,20 @@ namespace RoBotUserApp.Pages
 
                         if (response.Success && response.Data.IsSuccessful)
                         {
-                            MessageBox.Show("Mesaj yeniləndi.", "Məlumat", MessageBoxButton.OK, MessageBoxImage.Information);
+                            UIHelper.Popup(PopupMessages.MessageUpdated, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Mesaj yenilənə bilmədi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                            UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Mesaj saxlanarkən bir xəta baş verdi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.ErrorWhileUpdatingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                DisableMainGrid?.Invoke(this, false); // Re-enable UI after API call
+                UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
             }
         }
 
@@ -206,7 +208,7 @@ namespace RoBotUserApp.Pages
                 return;
             }
 
-            DisableMainGrid?.Invoke(this, true); // Disable UI during API call
+            UIHelper.ToggleMainGridState(true, DisableMainGrid); // Disable UI during API call
 
             try
             {
@@ -216,19 +218,19 @@ namespace RoBotUserApp.Pages
                 if (response.Success && response.Data.IsSuccessful)
                 {
                     RemoveMessageTemplateFromUI(button);
-                    MessageBox.Show("Mesaj silindi.", "Məlumat", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UIHelper.Popup(PopupMessages.MessageDeleted, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Mesaj silinə bilmədi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.ErrorWhileDeletingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Mesaj silinərkən bir xəta baş verdi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessages.ErrorWhileDeletingMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            DisableMainGrid?.Invoke(this, false); // Re-enable UI after API call
+            UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
         }
 
         private void RemoveMessageTemplateFromUI(Button button)

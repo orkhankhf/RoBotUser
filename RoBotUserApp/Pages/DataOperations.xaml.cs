@@ -2,6 +2,7 @@
 using Common.Resources;
 using Entities.RequestModels;
 using NLog;
+using RoBotUserApp.UiHelpers;
 using System.Windows;
 using NLogLogger = NLog.ILogger;
 using UserControl = System.Windows.Controls.UserControl;
@@ -49,12 +50,12 @@ namespace RoBotUserApp.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Statistik məlumatlar yüklənə bilmədi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.StatisticsNotLoaded, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch
             {
-                MessageBox.Show("Statistik məlumatları yükləyərkən xəta baş verdi.", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessages.StatisticsNotLoaded, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -62,7 +63,7 @@ namespace RoBotUserApp.Pages
         #region TextBox And Button Events
         private async void AssignNewNumbersBtn_Click(object sender, RoutedEventArgs e)
         {
-            DisableMainGrid?.Invoke(this, true); // Disable UI during API call
+            UIHelper.ToggleMainGridState(true, DisableMainGrid); // Disable UI during API call
 
             try
             {
@@ -85,24 +86,24 @@ namespace RoBotUserApp.Pages
                     {
                         var remainingTime = response.Data.RemainingWaitTime.Value;
                         TimeSpan truncatedRemainingTime = new TimeSpan(remainingTime.Hours, remainingTime.Minutes, remainingTime.Seconds);
-                        MessageBox.Show(string.Format(UIRes.DataOperations_RemainingTimeLimitIssue, truncatedRemainingTime), UIRes.General_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        UIHelper.Popup(string.Format(PopupMessages.RemainingTimeLimitIssue, truncatedRemainingTime), PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                     else
                     {
-                        MessageBox.Show("Yeni nömrələr uğurla təyin edildi.", "Məlumat", MessageBoxButton.OK, MessageBoxImage.Information);
+                        UIHelper.Popup(PopupMessages.NumbersAssigned, PopupMessages.Title_Info, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Nömrələri təyin edərkən xəta baş verdi: {response.ErrorMessage}", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(string.Format(PopupMessages.ErrorWhileAssignNumbers, response.ErrorMessage), PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Nömrələr təyin olunarkən xəta baş verdi!", "Xəta", MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(string.Format(PopupMessages.ErrorWhileAssignNumbers, ex.Message), PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            DisableMainGrid?.Invoke(this, false); // Re-enable UI after API call
+            UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
         }
         #endregion
 

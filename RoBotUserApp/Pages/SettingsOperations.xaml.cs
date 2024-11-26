@@ -8,6 +8,7 @@ using Common.Helpers;
 using Entities.RequestModels;
 using System.Windows;
 using Entities.Models;
+using RoBotUserApp.UiHelpers;
 
 namespace RoBotUserApp.Pages
 {
@@ -50,7 +51,7 @@ namespace RoBotUserApp.Pages
         private async void SaveBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             // Disable the entire UI
-            DisableMainGrid?.Invoke(this, true);
+            UIHelper.ToggleMainGridState(true, DisableMainGrid);
 
             try
             {
@@ -58,7 +59,7 @@ namespace RoBotUserApp.Pages
 
                 if (string.IsNullOrWhiteSpace(voiceMessagePhoneNumberValue))
                 {
-                    MessageBox.Show(UIRes.SettingsOperations_EnterPhoneNumber, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.EnterPhoneNumber, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -83,20 +84,31 @@ namespace RoBotUserApp.Pages
 
                 if (response.Success && response.Data.IsSuccessful)
                 {
-                    MessageBox.Show(UIRes.General_ChangesSaved, UIRes.General_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Update static source UserSettings.UserAppSettings
+                    foreach (var setting in settings)
+                    {
+                        var existingSetting = UserSettings.UserAppSettings.FirstOrDefault(us => us.Key == setting.Key);
+                        if (existingSetting != null)
+                        {
+                            // Update existing setting value
+                            existingSetting.Value = setting.Value;
+                        }
+                    }
+
+                    UIHelper.Popup(PopupMessages.General_ChangesSaved, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show(UIRes.General_UnexpectedErrorOccured, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                    UIHelper.Popup(PopupMessages.General_UnexpectedErrorOccured, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(UIRes.General_UnexpectedErrorOccured, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(PopupMessages.General_UnexpectedErrorOccured, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
             // Enable the entire UI
-            DisableMainGrid?.Invoke(this, false); // Enable MainGrid
+            UIHelper.ToggleMainGridState(false, DisableMainGrid); // Enable MainGrid
         }
         #endregion
     }

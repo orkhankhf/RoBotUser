@@ -5,6 +5,7 @@ using Entities.Enums;
 using Entities.Models;
 using Entities.RequestModels;
 using RoBotUserApp.Pages;
+using RoBotUserApp.UiHelpers;
 using System.Windows;
 
 namespace RoBotUserApp
@@ -120,7 +121,7 @@ namespace RoBotUserApp
 
             if (string.IsNullOrWhiteSpace(token))
             {
-                MessageBox.Show(UIRes.General_PleaseEnterValidToken, UIRes.General_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                UIHelper.Popup(PopupMessages.General_PleaseEnterValidToken, PopupMessages.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -143,7 +144,7 @@ namespace RoBotUserApp
             }
             else
             {
-                MessageBox.Show(res.ErrorMessage, UIRes.General_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
+                UIHelper.Popup(res.ErrorMessage, PopupMessages.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
