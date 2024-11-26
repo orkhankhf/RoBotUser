@@ -25,6 +25,9 @@ namespace RoBotUserApp.Pages
         private async Task FillUITextsAsync()
         {
             VoiceMessagePhoneNumberTextBlock.Text = UIRes.SettingsOperations_VoiceMessagePhoneNumberTextBlock;
+            ChromeTextBlock.Text = UIRes.SettingsOperations_ChromeTextBlock;
+            WhatsAppTextBlock.Text = UIRes.SettingsOperations_WhatsAppTextBlock;
+            WhatsappMessageUrlTextBlock.Text = UIRes.SettingsOperations_WhatsappMessageUrlTextBlock;
             SaveBtn.Content = UIRes.SettingsOperations_SaveBtn;
         }
 
@@ -32,6 +35,15 @@ namespace RoBotUserApp.Pages
         {
             VoiceMessagePhoneNumberTextBox.Text = UserSettings.UserAppSettings
                 .FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.VoiceMessagePhoneNumber)?.Value;
+
+            ChromeTextBox.Text = UserSettings.UserAppSettings
+                .FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.Chrome)?.Value;
+
+            WhatsAppTextBox.Text = UserSettings.UserAppSettings
+                .FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsApp)?.Value;
+
+            WhatsappMessageUrlTextBox.Text = UserSettings.UserAppSettings
+                .FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsappMessageUrl)?.Value;
         }
 
         #region TextBox And Button Events

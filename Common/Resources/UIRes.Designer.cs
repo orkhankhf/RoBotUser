@@ -286,6 +286,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browser.
+        /// </summary>
+        public static string SettingsOperations_ChromeTextBlock {
+            get {
+                return ResourceManager.GetString("SettingsOperations_ChromeTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telefon nömrəsi daxil edilməyib!.
         /// </summary>
         public static string SettingsOperations_EnterPhoneNumber {
@@ -309,6 +318,33 @@ namespace Common.Resources {
         public static string SettingsOperations_VoiceMessagePhoneNumberTextBlock {
             get {
                 return ResourceManager.GetString("SettingsOperations_VoiceMessagePhoneNumberTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whatsapp URL.
+        /// </summary>
+        public static string SettingsOperations_WhatsappMessageUrlTextBlock {
+            get {
+                return ResourceManager.GetString("SettingsOperations_WhatsappMessageUrlTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WhatsApp.
+        /// </summary>
+        public static string SettingsOperations_WhatsAppTextBlock {
+            get {
+                return ResourceManager.GetString("SettingsOperations_WhatsAppTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whatsapp URL.
+        /// </summary>
+        public static string WhatsappMessageUrlTextBlock {
+            get {
+                return ResourceManager.GetString("WhatsappMessageUrlTextBlock", resourceCulture);
             }
         }
         

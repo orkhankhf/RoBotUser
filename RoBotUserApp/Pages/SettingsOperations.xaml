@@ -32,12 +32,47 @@
                  Width="250"
                  Grid.Column="1" 
                  Grid.Row="0"/>
+        
+        <!-- Chrome input field -->
+        <TextBlock x:Name="ChromeTextBlock"
+                   Text="Browser"
+                   Grid.Column="0" 
+                   Grid.Row="1"/>
 
-        
-        
-        
-        
-        
+        <TextBox x:Name="ChromeTextBox"
+                 Text="chrome"
+                 Width="250"
+                 IsEnabled="False"
+                 Grid.Column="1" 
+                 Grid.Row="1"/>
+
+        <!-- WhatsApp input field -->
+        <TextBlock x:Name="WhatsAppTextBlock"
+                   Text="Whatsapp"
+                   Grid.Column="0" 
+                   Grid.Row="2"/>
+
+        <TextBox x:Name="WhatsAppTextBox"
+                 Text="WhatsApp"
+                 Width="250"
+                 IsEnabled="False"
+                 Grid.Column="1" 
+                 Grid.Row="2"/>
+
+        <!-- WhatsappMessageUrl input field -->
+        <TextBlock x:Name="WhatsappMessageUrlTextBlock"
+                   Text="Whatsapp URL"
+                   Grid.Column="0" 
+                   Grid.Row="3"/>
+
+        <TextBox x:Name="WhatsappMessageUrlTextBox"
+                 Text="https://wa.me/{0}"
+                 Width="250"
+                 IsEnabled="False"
+                 Grid.Column="1" 
+                 Grid.Row="3"/>
+
+
         <!-- Button to save settings -->
         <Button x:Name="SaveBtn"
             Content="Yadda saxla"

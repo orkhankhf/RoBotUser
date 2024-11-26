@@ -1,6 +1,5 @@
 ﻿using Common.Helpers;
 using Common.Resources;
-using Entities.Models;
 using Entities.RequestModels;
 using NLog;
 using System.Windows;

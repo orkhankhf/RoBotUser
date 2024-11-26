@@ -207,4 +207,16 @@
   <data name="DataOperations_LimitPerRequestText" xml:space="preserve">
     <value>Hər yenilənmədə əldə olunan nömrə: {0}</value>
   </data>
+  <data name="WhatsappMessageUrlTextBlock" xml:space="preserve">
+    <value>Whatsapp URL</value>
+  </data>
+  <data name="SettingsOperations_ChromeTextBlock" xml:space="preserve">
+    <value>Browser</value>
+  </data>
+  <data name="SettingsOperations_WhatsAppTextBlock" xml:space="preserve">
+    <value>WhatsApp</value>
+  </data>
+  <data name="SettingsOperations_WhatsappMessageUrlTextBlock" xml:space="preserve">
+    <value>Whatsapp URL</value>
+  </data>
 </root>

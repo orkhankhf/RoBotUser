@@ -38,33 +38,5 @@ namespace Common
         {
             public static string BaseUrl => GetSetting("Api:BaseUrl");
         }
-
-        /// <summary>
-        /// Inner static class for Application-specific settings
-        /// </summary>
-        public static class App
-        {
-            // Static properties to retrieve settings from cache or configuration
-            public static string AdminPassword => GetSetting("App:AdminPassword");
-            public static string Chrome => GetSetting("App:Chrome");
-            public static string CroppedImageFileName => GetSetting("App:CroppedImageFileName");
-            public static string CroppedImagePath => GetSetting("App:CroppedImagePath");
-            public static string CroppedMainImageFileName => GetSetting("App:CroppedMainImageFileName");
-            public static string ImageSelectFilter => GetSetting("App:ImageSelectFilter");
-            public static string PhoneNumber => GetSetting("App:PhoneNumber");
-            public static string RedirectVoiceMessageNumber => GetSetting("App:RedirectVoiceMessageNumber");
-            public static string TurboAzUrl => GetSetting("App:TurboAzUrl");
-            public static string UrlStartsWith => GetSetting("App:UrlStartsWith");
-            public static string WhatsApp => GetSetting("App:WhatsApp");
-            public static string WhatsappMessageUrl => GetSetting("App:WhatsappMessageUrl");
-        }
-
-        /// <summary>
-        /// Inner static class for Connection Strings
-        /// </summary>
-        public static class ConnectionStrings
-        {
-            public static string DefaultConnection => _configuration.GetConnectionString("DefaultConnection");
-        }
     }
 }

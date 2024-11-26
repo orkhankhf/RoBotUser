@@ -55,7 +55,6 @@ namespace RoBotApp
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Common.Resources;
+using Entities.Enums;
 using InputSimulatorStandard;
 using NLog;
 using System.Runtime.InteropServices;
@@ -13,7 +14,8 @@ namespace Common.Helpers
         public static void BringWhatsAppToFrontAndResize(int xPosition, int yPosition, int width, int height)
         {
             // Find the WhatsApp window by its title
-            IntPtr whatsappHandle = FindWindow(null, AppSettings.App.WhatsApp);
+            var whatsapp = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsApp)?.Value;
+            IntPtr whatsappHandle = FindWindow(null, whatsapp);
 
             if (whatsappHandle != IntPtr.Zero)
             {
@@ -25,16 +27,55 @@ namespace Common.Helpers
             }
             else
             {
-                Logger.Error(string.Format(LogMessagesRes.WindowNotFound, AppSettings.App.WhatsApp));
+                Logger.Error(string.Format(LogMessagesRes.WindowNotFound, whatsapp));
+            }
+        }
+
+        public static async Task SendWhatsAppMessageAsync(string phoneNumber, string message, bool sendVoiceMessage)
+        {
+            var whatsapp = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsApp)?.Value;
+            var voiceMessagePhoneNumber = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.VoiceMessagePhoneNumber)?.Value;
+
+            BringWhatsAppToFrontAndResize(800, 500, 1200, 800);
+
+            //click new chat
+            await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 297, 90, 600, 700);
+            await TaskHelper.ShortDelay();
+
+            //type phone number
+            await KeyMouseHelper.EnterText(phoneNumber);
+            await TaskHelper.ShortDelay();
+
+            bool isWhatsappNumberAvailable = ScreenRecognitionHelper.IsWhatsappNumberAvailable();
+
+            if (isWhatsappNumberAvailable)
+            {
+                await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 380, 275, 600, 700);
+
+                await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 630, 760, 600, 700);
+
+                await KeyMouseHelper.EnterText(message);
+
+                KeyMouseHelper.PressEnter();
+
+                if (sendVoiceMessage)
+                    await RedirectVoiceMessage(voiceMessagePhoneNumber, phoneNumber);
+            }
+            else
+            {
+                //whatsapp is not available
+                await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 800, 770, 600, 700);
             }
         }
 
         public static async Task RedirectVoiceMessage(string from, string to)
         {
-            AppHelper.OpenUrlBrowser(string.Format(AppSettings.App.WhatsappMessageUrl, from));
-            
+            var whatsappMessageUrl = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsappMessageUrl)?.Value;
+            AppHelper.OpenUrlBrowser(string.Format(whatsappMessageUrl, from));
+
+            var whatsapp = UserSettings.UserAppSettings.FirstOrDefault(m => m.Key == UserAppSettingKeyEnum.WhatsApp)?.Value;
             //after opening whatsapp in browser, wait until opens whatsapp app
-            while (AppHelper.GetActiveWindowName() != AppSettings.App.WhatsApp)
+            while (AppHelper.GetActiveWindowName() != whatsapp)
             {
                 await TaskHelper.MediumDelay();
             }
@@ -48,11 +89,11 @@ namespace Common.Helpers
             InputSimulator sim = new InputSimulator();
 
             //right click to voice message
-            await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 560, 660, 600, 700);
-            await KeyMouseHelper.RightClickRelativeToWindow(AppSettings.App.WhatsApp, 560, 660, 600, 700);
+            await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 560, 660, 600, 700);
+            await KeyMouseHelper.RightClickRelativeToWindow(whatsapp, 560, 660, 600, 700);
 
             //click "Forward"
-            await KeyMouseHelper.LeftDoubleClickRelativeToWindow(AppSettings.App.WhatsApp, 590, 320, 600, 700);
+            await KeyMouseHelper.LeftDoubleClickRelativeToWindow(whatsapp, 590, 320, 600, 700);
             await TaskHelper.MediumDelay();
 
             //search number and forward
@@ -61,56 +102,10 @@ namespace Common.Helpers
             await TaskHelper.MediumDelay();
 
             //click phone number
-            await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 630, 320, 600, 700);
+            await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 630, 320, 600, 700);
 
             //click "Forward"
-            await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 690, 260, 600, 700);
-        }
-
-        public static async Task SendWhatsAppMessageAsync(string message, bool sendVoiceMessage)
-        {
-            //string formattedNumber = AppHelper.FormatPhoneNumberToCountryCode(adInformation.PhoneNumber);
-
-            ////test number
-            ////formattedNumber = "+994702972111";
-
-            //if (!string.IsNullOrEmpty(formattedNumber))
-            //{
-            //    BringWhatsAppToFrontAndResize(800, 500, 1200, 800);
-
-            //    //click new chat
-            //    await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 297, 90, 600, 700);
-            //    await TaskHelper.ShortDelay();
-
-            //    //type phone number
-            //    await KeyMouseHelper.EnterText(formattedNumber);
-            //    await TaskHelper.ShortDelay();
-
-            //    bool isWhatsappNumberAvailable = ScreenRecognitionHelper.IsWhatsappNumberAvailable();
-
-            //    if (isWhatsappNumberAvailable)
-            //    {
-            //        await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 380, 275, 600, 700);
-
-            //        await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 630, 760, 600, 700);
-
-            //        await KeyMouseHelper.EnterText(message + "\r\n\r\n" + adInformation.Url);
-
-            //        KeyMouseHelper.PressEnter();
-
-            //        if (sendVoiceMessage)
-            //            await RedirectVoiceMessage(AppSettings.App.RedirectVoiceMessageNumber, formattedNumber);
-            //    }
-            //    else
-            //    {
-            //        //whatsapp is not available
-            //        await KeyMouseHelper.LeftClickRelativeToWindow(AppSettings.App.WhatsApp, 800, 770, 600, 700);
-            //    }
-            //}
-            //else
-            //{
-            //    Logger.Error(string.Format(LogMessagesRes.FormattedPhoneIsInvalid, formattedNumber));
-            //}
+            await KeyMouseHelper.LeftClickRelativeToWindow(whatsapp, 690, 260, 600, 700);
         }
 
         [DllImport("user32.dll")]
