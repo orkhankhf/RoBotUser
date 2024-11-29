@@ -1,0 +1,18 @@
+(send project files in ZIP format in first message)
+1. This is my projects about scraping data and sending whatsapp messages.
+The reason for having two different projects is to divide the project into admin and user sides. The RoBot project is the admin side, the RoBotUser project is the user side. Both projects use a WPF app, and the RoBot project also has an API project.
+Analyse both project structure, data structure, service and repository layers also program.cs file for api, App.Xaml.cs files in both solutions for WPF app project configuration.
+I also use EntityConfigurations in RoBot solution. Analyse all project files and notice all coding sytles. It is important that the answers you give from now on are compatible with the current project structure and architecture.
+
+
+
+2. Analyse my project files and codes deeper please
+
+
+
+
+
+
+TikTok:
+Salam. Mən tiktok-da yeni bir səhifə açmışam. Bir App proqramı məhsulumu məşhurlaşdırmaq və satmaq istəyirəm. Hədəf kütləm iş adamları, biznes sahəsində olanlar, məhsul satanlar və ya mağazası/biznesi olanlardır. Mənim hədəf kütləm, mənim onlara satdığım RoBot App sayəsində whatsapp üzərindən avtomatik mesaj göndərərək müştəri tapa bilərlər. Yəni, mən onlara bir RoBot App adlı proqram satacağam və onlar onu istifadə edərək 15000-ə qədər insana whatsapp üzərindən mesaj göndərərək öz məhsul və ya xidmətini reklam edəcəklər.
+Tiktok səhifəsini yeni açdığım üçün orada paylaşmağa şəkillər və dizaynlar hazırlamışam. Bu dizaynlara uyğun gözəl başlıqlar, hashtag'lar yaratmağını istəyirəm. Müştərilərim elanı görən zaman mütləq diqqətini cəlb etməlidir.

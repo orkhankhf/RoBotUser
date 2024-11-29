@@ -29,12 +29,73 @@ SELECT FormattedNumber, COUNT(*) AS FormattedNumber FROM PhoneNumbers GROUP BY F
 
 select * from [Permissions];
 
-
 select * from DataFetchIntervals;
-delete from [Permissions]
+--delete from [Permissions]
 
 select * from UserTokens;
-delete from UserTokens
-
+--delete from UserTokens
 
 select * from AppSettings
+
+
+--Select TurboAzAdInfos which are not in PhoneNumbers table saved
+SELECT * 
+FROM TurboAzAdInfos t
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM PhoneNumbers p
+    WHERE p.FormattedNumber = t.PhoneNumber
+);
+
+--Select TurboAzAdInfos which are not in UrlsToProcess table saved
+SELECT *
+FROM TurboAzAdInfos t
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM UrlsToProcess u
+    WHERE u.Url = t.Url
+);
+
+--Insert from TurboAzAdInfos to UrlsToProcess
+--INSERT INTO UrlsToProcess (Url, IsProcessed, DateCreated)
+--SELECT t.Url, 1, GETUTCDATE() -- Default IsProcessed value set to false (0)
+--FROM TurboAzAdInfos t
+--WHERE NOT EXISTS (
+--    SELECT 1
+--    FROM UrlsToProcess u
+--    WHERE u.Url = t.Url
+--);
+
+
+
+
+--Insert from TurboAzAdInfos to PhoneNumbers
+--WITH UniquePhoneNumbers AS (
+--    SELECT 
+--        t.PhoneNumber AS FormattedNumber,
+--        CAST(REPLACE(REPLACE(REPLACE(t.Price, ' AZN', ''), ' USD', ''), ' ', '') AS DECIMAL(10, 2)) AS PriceOfProduct,
+--        CASE 
+--            WHEN t.Price LIKE '%AZN%' THEN 1
+--            WHEN t.Price LIKE '%USD%' THEN 2
+--            ELSE 0
+--        END AS Currency,
+--        t.City AS City,
+--        1 AS Category, -- Hardcoded value for Category
+--        DATEADD(MONTH, -1, GETDATE()) AS LastAssignedAt,
+--        GETDATE() AS DateCreated,
+--        ROW_NUMBER() OVER (PARTITION BY t.PhoneNumber ORDER BY t.DateCreated DESC) AS RowNum
+--    FROM TurboAzAdInfos t
+--    WHERE 
+--        ISNUMERIC(REPLACE(REPLACE(REPLACE(t.Price, ' AZN', ''), ' USD', ''), ' ', '')) = 1
+--)
+---- Filter to keep only one record per FormattedNumber
+--INSERT INTO PhoneNumbers (FormattedNumber, PriceOfProduct, Currency, City, Category, LastAssignedAt, DateCreated)
+--SELECT 
+--    FormattedNumber, PriceOfProduct, Currency, City, Category, LastAssignedAt, DateCreated
+--FROM UniquePhoneNumbers
+--WHERE RowNum = 1
+--AND NOT EXISTS (
+--    SELECT 1
+--    FROM PhoneNumbers p
+--    WHERE p.FormattedNumber = UniquePhoneNumbers.FormattedNumber
+--);
