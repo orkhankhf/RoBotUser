@@ -198,4 +198,22 @@
   <data name="SettingsOperations_WhatsappMessageUrlTextBlock" xml:space="preserve">
     <value>Whatsapp URL</value>
   </data>
+  <data name="DataOperations_SearchText" xml:space="preserve">
+    <value>Axtarış</value>
+  </data>
+  <data name="DataOperations_SelectedCitiesText" xml:space="preserve">
+    <value>Seçilmiş şəhərlər</value>
+  </data>
+  <data name="DataOperations_SelectedCategoriesText" xml:space="preserve">
+    <value>Seçilmiş Kateqoriyalar</value>
+  </data>
+  <data name="DataOperations_PriceRangeText" xml:space="preserve">
+    <value>Qiymət aralığı</value>
+  </data>
+  <data name="DataOperations_ShowFilteredResultText" xml:space="preserve">
+    <value>Filter nəticəsinə bax</value>
+  </data>
+  <data name="DataOperations_FilteredCountText" xml:space="preserve">
+    <value>Tapıldı: {0}</value>
+  </data>
 </root>

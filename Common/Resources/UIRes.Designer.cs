@@ -88,6 +88,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tapıldı: {0}.
+        /// </summary>
+        public static string DataOperations_FilteredCountText {
+            get {
+                return ResourceManager.GetString("DataOperations_FilteredCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Son yenilənmə vaxtı: {0}.
         /// </summary>
         public static string DataOperations_LastAssignTimeText {
@@ -106,11 +115,56 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Qiymət aralığı.
+        /// </summary>
+        public static string DataOperations_PriceRangeText {
+            get {
+                return ResourceManager.GetString("DataOperations_PriceRangeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Axtarış.
+        /// </summary>
+        public static string DataOperations_SearchText {
+            get {
+                return ResourceManager.GetString("DataOperations_SearchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seçilmiş Kateqoriyalar.
+        /// </summary>
+        public static string DataOperations_SelectedCategoriesText {
+            get {
+                return ResourceManager.GetString("DataOperations_SelectedCategoriesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seçilmiş şəhərlər.
+        /// </summary>
+        public static string DataOperations_SelectedCitiesText {
+            get {
+                return ResourceManager.GetString("DataOperations_SelectedCitiesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mesaj göndərilən nömrələr: {0}.
         /// </summary>
         public static string DataOperations_SentMessageNumberCountText {
             get {
                 return ResourceManager.GetString("DataOperations_SentMessageNumberCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter nəticəsinə bax.
+        /// </summary>
+        public static string DataOperations_ShowFilteredResultText {
+            get {
+                return ResourceManager.GetString("DataOperations_ShowFilteredResultText", resourceCulture);
             }
         }
         

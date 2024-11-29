@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using Entities.Enums;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -97,6 +98,47 @@ namespace Common.Helpers
                 return result;
 
             return default; // Default value if parsing fails
+        }
+
+        public static TEnum MapDescriptionToEnum<TEnum>(string description) where TEnum : Enum
+        {
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentNullException(nameof(description), "Description cannot be null or empty.");
+
+            var type = typeof(TEnum);
+
+            // Iterate through all fields in the enum
+            foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
+            {
+                // Check if the field has a DescriptionAttribute
+                var attribute = field.GetCustomAttribute<DescriptionAttribute>();
+
+                // Compare the provided description with the DescriptionAttribute value
+                if ((attribute != null && attribute.Description == description) || field.Name == description)
+                {
+                    return (TEnum)field.GetValue(null);
+                }
+            }
+
+            throw new ArgumentException($"No enum with description '{description}' found in {type.Name}.");
+        }
+
+        public static List<string> GetEnumDescriptionsForMultiSelectElements<TEnum>() where TEnum : Enum
+        {
+            var type = typeof(TEnum);
+
+            return Enum.GetValues(type)
+                .Cast<TEnum>()
+                .Select(enumValue =>
+                {
+                    var fieldInfo = type.GetField(enumValue.ToString());
+                    var descriptionAttribute = fieldInfo?.GetCustomAttribute<DescriptionAttribute>();
+
+                    // Use the DescriptionAttribute value if it exists, otherwise fall back to the enum name
+                    return descriptionAttribute != null ? descriptionAttribute.Description : enumValue.ToString();
+                })
+                .Where(description => !string.IsNullOrWhiteSpace(description)) // Filter out empty descriptions
+                .ToList();
         }
     }
 }

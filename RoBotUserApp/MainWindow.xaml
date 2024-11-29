@@ -9,7 +9,7 @@
         <!-- Token Input Section -->
         <StackPanel x:Name="LoginStackPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
             <!-- Token TextBox -->
-            <TextBox x:Name="TokenTextBox" Width="600" Text="2e7e2fe91e504d129b0c0f6a46fbccaa30ee12a78ba74d6c99be787e3a8120350c0b2627f28f4d12a1dbec4e92f943ef"/>
+            <TextBox x:Name="TokenTextBox" Width="600" Text="c4aa9f6a431d4aa7944bf797b8ba17c8e6e0f14ac32f4b438c27dce500dc9890961213c63ea148cc88e731edc1e84929"/>
 
             <!-- Validate Button -->
             <Button x:Name="LoginWithTokenBtn" HorizontalAlignment="Center" Content="Tokenlə Giriş" Width="150" Click="LoginWithTokenBtn_Click" />

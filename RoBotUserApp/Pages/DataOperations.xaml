@@ -46,7 +46,35 @@
             <TextBlock x:Name="LastAssignTimeText" Text="Son yenilənmə vaxtı: -" />
             <TextBlock x:Name="LimitPerRequestText" Text="Hər yenilənmədə əldə olunan nömrə: 0" />
         </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10">
+            <TextBlock x:Name="SearchText" Text="Axtarış" FontSize="18" FontWeight="Bold" Margin="0,10" />
 
+            <!-- Cities Selection -->
+            <TextBlock x:Name="SelectedCitiesText" Text="Seçilmiş şəhərlər:" Margin="0,5" />
+            <ListBox x:Name="CitiesListBox" SelectionMode="Multiple" HorizontalAlignment="Left" Height="200" Width="250">
+                <!-- Populate dynamically -->
+            </ListBox>
+
+            <!-- Categories Selection -->
+            <TextBlock x:Name="SelectedCategoriesText" Text="Seçilmiş Kateqoriyalar:" Margin="0,20,0,0" />
+            <ListBox x:Name="CategoriesListBox" SelectionMode="Multiple" HorizontalAlignment="Left" Height="200" Width="250">
+                <!-- Populate dynamically -->
+            </ListBox>
+
+            <!-- Price Range -->
+            <TextBlock x:Name="PriceRangeText" Text="Qiymət aralığı:" Margin="0,20,0,0" />
+            <StackPanel Orientation="Horizontal" Margin="0">
+                <TextBox x:Name="PriceFromTextBox" Width="112" />
+                <TextBlock Text=" - " VerticalAlignment="Center" Margin="5,0" />
+                <TextBox x:Name="PriceToTextBox" Width="112" />
+            </StackPanel>
+
+            <!-- Get Filtered Count -->
+            <Button x:Name="GetFilteredCountBtn" Content="Filter nəticəsinə bax" Margin="0,10" Click="FilterBtn_Click" />
+            <TextBlock x:Name="FilteredCountText" Text="Tapıldı: 0" />
+        </StackPanel>
+        
         <!-- Assign Button -->
         <Button x:Name="AssignNewNumbersBtn"
                 Content="Yeni nömrələr təyin et"
@@ -55,12 +83,12 @@
                 Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Grid.Column="0"
+                Grid.Column="1"
                 Grid.Row="1"
                 Click="AssignNewNumbersBtn_Click" />
 
         <!-- Additional Content Placeholder -->
-        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="10">
+        <StackPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Margin="10">
             <!-- Future content can go here -->
         </StackPanel>
     </Grid>

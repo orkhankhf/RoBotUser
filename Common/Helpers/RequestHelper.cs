@@ -33,6 +33,46 @@ namespace Common.Helpers
             return result;
         }
 
+        public static async Task<ApiResponse<T>> GetFilteredAsync<T>(string url, object queryParams)
+        {
+            if (queryParams != null)
+            {
+                var queryParamsDictionary = queryParams.GetType()
+                    .GetProperties()
+                    .Where(prop => prop.GetValue(queryParams, null) != null) // Exclude null properties
+                    .SelectMany(prop =>
+                    {
+                        var value = prop.GetValue(queryParams, null);
+
+                        if (value is IEnumerable<int> collection) // Handle lists of integers (e.g., Cities, Categories)
+                        {
+                            return collection.Select(item => new KeyValuePair<string, string>(prop.Name, item.ToString()));
+                        }
+
+                        return new[] { new KeyValuePair<string, string>(prop.Name, value.ToString()) }; // Handle single values
+                    });
+
+                var query = string.Join("&", queryParamsDictionary.Select(kv =>
+                    $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
+
+                url += $"?{query}";
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, BaseUrl + url);
+            AddUserTokenHeader(request);
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error calling {url}: {response.StatusCode} {response.ReasonPhrase}");
+            }
+
+            var result = JsonSerializer.Deserialize<ApiResponse<T>>(jsonResponse);
+            return result;
+        }
+
         //POST method
         public static async Task<ApiResponse<TResponse>> PostAsync<TRequest, TResponse>(string url, TRequest data)
         {

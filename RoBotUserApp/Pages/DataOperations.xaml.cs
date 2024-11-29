@@ -1,5 +1,6 @@
 ﻿using Common.Helpers;
 using Common.Resources;
+using Entities.Enums;
 using Entities.RequestModels;
 using NLog;
 using RoBotUserApp.UiHelpers;
@@ -18,6 +19,7 @@ namespace RoBotUserApp.Pages
         public DataOperations()
         {
             InitializeComponent();
+            _ = PopulateFilterOptionsAsync();
             _ = FillUITextsAsync();
             _ = LoadStatisticsAsync();
         }
@@ -25,6 +27,12 @@ namespace RoBotUserApp.Pages
         private async Task FillUITextsAsync()
         {
             AssignNewNumbersBtn.Content = UIRes.DataOperations_AssignNewNumbersBtn;
+            SearchText.Text = UIRes.DataOperations_SearchText;
+            SelectedCitiesText.Text = UIRes.DataOperations_SelectedCitiesText;
+            SelectedCategoriesText.Text = UIRes.DataOperations_SelectedCategoriesText;
+            PriceRangeText.Text = UIRes.DataOperations_PriceRangeText;
+            GetFilteredCountBtn.Content = UIRes.DataOperations_ShowFilteredResultText;
+            FilteredCountText.Text = string.Format(UIRes.DataOperations_FilteredCountText, 0);
         }
 
         private async Task LoadStatisticsAsync()
@@ -58,6 +66,77 @@ namespace RoBotUserApp.Pages
                 UIHelper.Popup(PopupMessagesRes.StatisticsNotLoaded, PopupMessagesRes.Title_ErrorOccured, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        #region Filter Section
+        private async Task PopulateFilterOptionsAsync()
+        {
+            // Populate CitiesListBox dynamically with enum descriptions
+            CitiesListBox.ItemsSource = EnumHelper.GetEnumDescriptionsForMultiSelectElements<CityEnum>();
+
+            // Populate CategoriesListBox dynamically with enum descriptions
+            CategoriesListBox.ItemsSource = EnumHelper.GetEnumDescriptionsForMultiSelectElements<CategoryEnum>();
+        }
+
+        private async void FilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UIHelper.ToggleMainGridState(true, DisableMainGrid);
+
+                // Dynamically get selected cities from the CitiesListBox
+                var selectedCities = CitiesListBox.SelectedItems
+                    .Cast<string>()
+                    .Select(city => (int)EnumHelper.MapDescriptionToEnum<CityEnum>(city))
+                    .ToList();
+
+                // Dynamically get selected categories from the CategoriesListBox
+                var selectedCategories = CategoriesListBox.SelectedItems
+                    .Cast<string>()
+                    .Select(category => (int)EnumHelper.MapDescriptionToEnum<CategoryEnum>(category))
+                    .ToList();
+
+                // Parse PriceFrom and PriceTo dynamically from TextBoxes
+                decimal? priceFrom = string.IsNullOrWhiteSpace(PriceFromTextBox.Text)
+                    ? null
+                    : decimal.Parse(PriceFromTextBox.Text);
+
+                decimal? priceTo = string.IsNullOrWhiteSpace(PriceToTextBox.Text)
+                    ? null
+                    : decimal.Parse(PriceToTextBox.Text);
+
+                // Dynamically build the request object
+                var request = new GetFilteredPhoneNumbersRequest
+                {
+                    Cities = selectedCities,
+                    Categories = selectedCategories,
+                    PriceFrom = priceFrom,
+                    PriceTo = priceTo
+                };
+
+                // Call the API
+                string apiUrl = "/AssignedPhoneNumber/GetFilteredPhoneNumbersCount";
+                var response = await RequestHelper.GetFilteredAsync<GetFilteredPhoneNumbersResponse>(apiUrl, request);
+
+                if (response.Success)
+                {
+                    // Update the filtered count on the UI
+                    FilteredCountText.Text = $"Tapıldı: {response.Data.Count}";
+                }
+                else
+                {
+                    UIHelper.Popup("Error while filtering numbers.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                UIHelper.Popup($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                UIHelper.ToggleMainGridState(false, DisableMainGrid);
+            }
+        }
+        #endregion
 
 
         #region TextBox And Button Events
