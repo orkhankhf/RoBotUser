@@ -5,6 +5,7 @@ using Entities.RequestModels;
 using NLog;
 using RoBotUserApp.UiHelpers;
 using System.Windows;
+using System.Windows.Input;
 using NLogLogger = NLog.ILogger;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -140,19 +141,48 @@ namespace RoBotUserApp.Pages
 
 
         #region TextBox And Button Events
+        private async void RefreshStatisticsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadStatisticsAsync();
+        }
+
         private async void AssignNewNumbersBtn_Click(object sender, RoutedEventArgs e)
         {
             UIHelper.ToggleMainGridState(true, DisableMainGrid); // Disable UI during API call
 
             try
             {
+                // Dynamically get selected cities from the CitiesListBox
+                var selectedCities = CitiesListBox.SelectedItems
+                    .Cast<string>()
+                    .Select(city => (int)EnumHelper.MapDescriptionToEnum<CityEnum>(city))
+                    .ToList();
+
+                // Dynamically get selected categories from the CategoriesListBox
+                var selectedCategories = CategoriesListBox.SelectedItems
+                    .Cast<string>()
+                    .Select(category => (int)EnumHelper.MapDescriptionToEnum<CategoryEnum>(category))
+                    .ToList();
+
+                // Parse PriceFrom and PriceTo dynamically from TextBoxes
+                decimal? priceFrom = string.IsNullOrWhiteSpace(PriceFromTextBox.Text)
+                    ? null
+                    : decimal.Parse(PriceFromTextBox.Text);
+
+                decimal? priceTo = string.IsNullOrWhiteSpace(PriceToTextBox.Text)
+                    ? null
+                    : decimal.Parse(PriceToTextBox.Text);
+
                 // Define the API endpoint
                 string apiUrl = "/AssignedPhoneNumber/AssignPhoneNumbers";
 
                 // Prepare the request payload
                 var request = new AssignPhoneNumbersRequest
                 {
-
+                    Cities = selectedCities,
+                    Categories = selectedCategories,
+                    PriceFrom = priceFrom,
+                    PriceTo = priceTo
                 };
 
                 // Send the POST request using the helper
@@ -184,11 +214,30 @@ namespace RoBotUserApp.Pages
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
         }
+
+        private void NumberOnlyTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.V && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                // Check clipboard content for numeric value
+                if (!int.TryParse(Clipboard.GetText(), out _))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
         #endregion
 
-        private async void RefreshStatisticsBtn_Click(object sender, RoutedEventArgs e)
+        private void NumberOnlyTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            await LoadStatisticsAsync();
+            // Allow only numeric input
+            e.Handled = !IsTextNumeric(e.Text);
+        }
+
+        private bool IsTextNumeric(string text)
+        {
+            // Check if the text is a valid numeric value
+            return int.TryParse(text, out _);
         }
     }
 }

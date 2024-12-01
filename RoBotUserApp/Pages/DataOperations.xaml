@@ -65,13 +65,13 @@
             <!-- Price Range -->
             <TextBlock x:Name="PriceRangeText" Text="Qiymət aralığı:" Margin="0,20,0,0" />
             <StackPanel Orientation="Horizontal" Margin="0">
-                <TextBox x:Name="PriceFromTextBox" Width="112" />
+                <TextBox x:Name="PriceFromTextBox" Width="112" PreviewTextInput="NumberOnlyTextBox_PreviewTextInput" PreviewKeyDown="NumberOnlyTextBox_PreviewKeyDown"/>
                 <TextBlock Text=" - " VerticalAlignment="Center" Margin="5,0" />
-                <TextBox x:Name="PriceToTextBox" Width="112" />
+                <TextBox x:Name="PriceToTextBox" Width="112" PreviewTextInput="NumberOnlyTextBox_PreviewTextInput" PreviewKeyDown="NumberOnlyTextBox_PreviewKeyDown"/>
             </StackPanel>
 
             <!-- Get Filtered Count -->
-            <Button x:Name="GetFilteredCountBtn" Content="Filter nəticəsinə bax" Margin="0,10" Click="FilterBtn_Click" />
+            <Button x:Name="GetFilteredCountBtn" Content="Filter nəticəsinə bax" Margin="0,10" Click="FilterBtn_Click" Width="250" />
             <TextBlock x:Name="FilteredCountText" Text="Tapıldı: 0" />
         </StackPanel>
         
@@ -79,7 +79,7 @@
         <Button x:Name="AssignNewNumbersBtn"
                 Content="Yeni nömrələr təyin et"
                 Margin="10"
-                Width="200"
+                Width="250"
                 Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
