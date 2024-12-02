@@ -192,4 +192,7 @@
   <data name="CantLoadNumbers" xml:space="preserve">
     <value>Nömrələr yüklənmədi!</value>
   </data>
+  <data name="PermissionDeniedForMultipleMessageTemplates" xml:space="preserve">
+    <value>Siz birdən çox şablon mesaj əlavə edə bilməzsiniz! Zəhmət olmasa paketinizi yüksəldin!</value>
+  </data>
 </root>

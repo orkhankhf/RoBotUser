@@ -232,6 +232,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Siz birdən çox şablon mesaj əlavə edə bilməzsiniz! Zəhmət olmasa paketinizi yüksəldin!.
+        /// </summary>
+        public static string PermissionDeniedForMultipleMessageTemplates {
+            get {
+                return ResourceManager.GetString("PermissionDeniedForMultipleMessageTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yeni nömrələr əldə etmək üçün gözləməlisiniz: {0}.
         /// </summary>
         public static string RemainingTimeLimitIssue {

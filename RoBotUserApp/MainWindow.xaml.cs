@@ -13,6 +13,7 @@ namespace RoBotUserApp
     public partial class MainWindow : Window
     {
         private WhatsappOperations _whatsappOperationsPage;
+        private MessageOperations _messageOperationsPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -74,10 +75,17 @@ namespace RoBotUserApp
         private void LoadMessageOperationsPage()
         {
             // Load Data Operations Page
-            MessageOperations messageOperationsPage = new MessageOperations();
-            messageOperationsPage.DisableMainGrid += DisableMainGrid;
-            MessageOperationsContent.Content = messageOperationsPage;
+            _messageOperationsPage = new MessageOperations();
+
+            _messageOperationsPage.DisableMainGrid += DisableMainGrid;
+            MessageOperationsContent.Content = _messageOperationsPage;
             MessageOperationsTab.Visibility = Visibility.Visible;
+
+            //permission state changer for add multiple message templates
+            _messageOperationsPage.CanSendDifferentTextMessages += isEnabled =>
+            {
+                _messageOperationsPage.CanSendDifferentTextMessagesState(isEnabled);
+            };
         }
 
         private void LoadAllPages()
@@ -111,6 +119,12 @@ namespace RoBotUserApp
             if (permissions.FirstOrDefault(m => m.PermissionFor == PermissionEnum.CanSendVoiceMessage && m.Value == 1) == null)
             {
                 _whatsappOperationsPage?.CanSendVoiceMessageState(false); // Disable checkbox
+            }
+
+            //Can send different text messages
+            if (permissions.FirstOrDefault(m=>m.PermissionFor == PermissionEnum.CanSendDifferentTextMessages && m.Value == 1) == null)
+            {
+                _messageOperationsPage.CanSendDifferentTextMessagesState(false);
             }
         }
 

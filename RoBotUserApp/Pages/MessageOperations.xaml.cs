@@ -13,6 +13,8 @@ namespace RoBotUserApp.Pages
     {
         public event EventHandler<bool> DisableMainGrid;
         private const int MaxMessageLength = 750;
+        public Action<bool> CanSendDifferentTextMessages { get; set; }
+        private bool _canSendDifferentTextMessages = true;
 
         public MessageOperations()
         {
@@ -47,12 +49,6 @@ namespace RoBotUserApp.Pages
             }
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
-        }
-
-        private void AddMessageBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // Add a new message template with no ID (ID = 0 for new messages)
-            AddMessageTemplateToUI(0, string.Empty);
         }
 
         private void AddMessageTemplateToUI(int messageId, string messageContent)
@@ -117,6 +113,31 @@ namespace RoBotUserApp.Pages
             containerGrid.Children.Add(buttonPanel);
 
             MessageTemplatesPanel.Children.Insert(0, containerGrid);
+        }
+
+        private void RemoveMessageTemplateFromUI(Button button)
+        {
+            var buttonPanel = button.Parent as StackPanel;
+            var container = buttonPanel.Parent as Grid;
+
+            if (container != null)
+            {
+                MessageTemplatesPanel.Children.Remove(container);
+            }
+        }
+
+
+        #region TextBox And Button Events
+        private void AddMessageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_canSendDifferentTextMessages && MessageTemplatesPanel.Children.Count > 0)
+            {
+                UIHelper.Popup(PopupMessagesRes.PermissionDeniedForMultipleMessageTemplates, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Add a new message template with no ID (ID = 0 for new messages)
+            AddMessageTemplateToUI(0, string.Empty);
         }
 
         private async void SaveMessageButton_Click(object sender, RoutedEventArgs e)
@@ -232,16 +253,14 @@ namespace RoBotUserApp.Pages
 
             UIHelper.ToggleMainGridState(false, DisableMainGrid); // Re-enable UI after API call
         }
+        #endregion
 
-        private void RemoveMessageTemplateFromUI(Button button)
+        #region Permission Action Methods
+        // Call this wherever the permission needs to be updated
+        public void CanSendDifferentTextMessagesState(bool canSend)
         {
-            var buttonPanel = button.Parent as StackPanel;
-            var container = buttonPanel.Parent as Grid;
-
-            if (container != null)
-            {
-                MessageTemplatesPanel.Children.Remove(container);
-            }
+            _canSendDifferentTextMessages = canSend;
         }
+        #endregion
     }
 }
