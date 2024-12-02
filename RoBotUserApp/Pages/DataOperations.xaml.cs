@@ -15,6 +15,10 @@ namespace RoBotUserApp.Pages
     {
         private static readonly NLogLogger Logger = LogManager.GetCurrentClassLogger();
         public event EventHandler<bool> DisableMainGrid;
+
+        public Action<bool> CanChooseCity { get; set; }
+
+        public Action<bool> CanAnalysePrice { get; set; }
         public static bool SendVoiceMessage { get; set; }
 
         public DataOperations()
@@ -239,5 +243,20 @@ namespace RoBotUserApp.Pages
             // Check if the text is a valid numeric value
             return int.TryParse(text, out _);
         }
+
+        #region Permission Action Methods
+        // Call this wherever the permission needs to be updated
+        public void CanChooseCityState(bool isEnabled)
+        {
+            CitiesListBox.IsEnabled = isEnabled;
+        }
+
+        // Call this wherever the permission needs to be updated
+        public void CanAnalysePriceState(bool isEnabled)
+        {
+            PriceFromTextBox.IsEnabled = isEnabled;
+            PriceToTextBox.IsEnabled = isEnabled;
+        }
+        #endregion
     }
 }

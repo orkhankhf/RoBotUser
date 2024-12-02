@@ -61,6 +61,13 @@ namespace RoBotUserApp.Pages
             // Disable the entire UI
             UIHelper.ToggleMainGridState(true, DisableMainGrid);
 
+            // Check if the current time is within the restricted range
+            if (DateTimeHelper.IsRestrictedTimeToSendMessage())
+            {
+                UIHelper.Popup(PopupMessagesRes.RestrictedTimeToSendMessage, PopupMessagesRes.Title_Attention, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             // Simulate API call to get phone numbers which not sent message
             string apiUrl = "/AssignedPhoneNumber/GetUnsentPhoneNumbers";
             var response = await RequestHelper.GetAsync<GetUnsentPhoneNumbersResponse>(apiUrl);

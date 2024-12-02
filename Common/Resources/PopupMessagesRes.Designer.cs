@@ -250,6 +250,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Səhər saat 08:30-dan axşam saat 21:00-a qədər mesaj göndərə bilərsiniz!.
+        /// </summary>
+        public static string RestrictedTimeToSendMessage {
+            get {
+                return ResourceManager.GetString("RestrictedTimeToSendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Statistik məlumatlar yüklənmədi!.
         /// </summary>
         public static string StatisticsNotLoaded {

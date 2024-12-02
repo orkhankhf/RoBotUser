@@ -14,6 +14,7 @@ namespace RoBotUserApp
     {
         private WhatsappOperations _whatsappOperationsPage;
         private MessageOperations _messageOperationsPage;
+        private DataOperations _dataOperationsPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,10 +42,23 @@ namespace RoBotUserApp
         private void LoadDataOperationsPage()
         {
             // Load Data Operations Page
-            DataOperations dataOperationsPage = new DataOperations();
-            dataOperationsPage.DisableMainGrid += DisableMainGrid;
-            DataOperationsContent.Content = dataOperationsPage;
+            _dataOperationsPage = new DataOperations();
+
+            _dataOperationsPage.DisableMainGrid += DisableMainGrid;
+            DataOperationsContent.Content = _dataOperationsPage;
             DataOperationsTab.Visibility = Visibility.Visible;
+
+            //permission state changer for send voice messages
+            _dataOperationsPage.CanChooseCity += isEnabled =>
+            {
+                _dataOperationsPage.CanChooseCityState(isEnabled);
+            };
+
+            //permission state changer for send voice messages
+            _dataOperationsPage.CanAnalysePrice += isEnabled =>
+            {
+                _dataOperationsPage.CanAnalysePriceState(isEnabled);
+            };
         }
 
         private void LoadWhatsappOperationsPage()
@@ -124,7 +138,19 @@ namespace RoBotUserApp
             //Can send different text messages
             if (permissions.FirstOrDefault(m=>m.PermissionFor == PermissionEnum.CanSendDifferentTextMessages && m.Value == 1) == null)
             {
-                _messageOperationsPage.CanSendDifferentTextMessagesState(false);
+                _messageOperationsPage?.CanSendDifferentTextMessagesState(false);
+            }
+
+            //Can choose city
+            if (permissions.FirstOrDefault(m => m.PermissionFor == PermissionEnum.CanChooseCity && m.Value == 1) == null)
+            {
+                _dataOperationsPage?.CanChooseCityState(false);
+            }
+
+            //Can analyse price
+            if (permissions.FirstOrDefault(m => m.PermissionFor == PermissionEnum.CanAnalysePrice && m.Value == 1) == null)
+            {
+                _dataOperationsPage?.CanAnalysePriceState(false);
             }
         }
 

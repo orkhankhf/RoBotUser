@@ -195,4 +195,7 @@
   <data name="PermissionDeniedForMultipleMessageTemplates" xml:space="preserve">
     <value>Siz birdən çox şablon mesaj əlavə edə bilməzsiniz! Zəhmət olmasa paketinizi yüksəldin!</value>
   </data>
+  <data name="RestrictedTimeToSendMessage" xml:space="preserve">
+    <value>Səhər saat 08:30-dan axşam saat 21:00-a qədər mesaj göndərə bilərsiniz!</value>
+  </data>
 </root>
